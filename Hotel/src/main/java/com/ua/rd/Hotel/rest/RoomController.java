@@ -29,29 +29,13 @@ public class RoomController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-
-
-//    @DeleteMapping("/rooms")
-//    public void deleteById(@PathVariable Long id) {
-//
-//    }
-
-    @DeleteMapping("/delete/{id}")
-    public void deleteDocument(@PathVariable(value = "id") Long id){
+    @DeleteMapping("/rooms/delete/{id}")
+    public void deleteRoom(@PathVariable(value = "id") Long id){
         roomService.deleteById(id);
     }
 
-//    @DeleteMapping("/delete")
-//    public void deleteDocument(@RequestBody Document document){
-//        documentRepo.delete(document);
-//    }
 
 
-//    @DeleteMapping("/rooms/{id}")
-//    public void deleteById(@PathVariable Long id) {
-//
-//        roomService.delete(id);
-//
-//    }
+
 
 }
