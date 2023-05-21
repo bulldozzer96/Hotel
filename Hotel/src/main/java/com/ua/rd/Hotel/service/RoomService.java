@@ -24,6 +24,12 @@ public class RoomService {
                         .collect(Collectors.toList());
     }
 
+    public List<RoomDto> findById(Long id) {
+        return roomRepository.findById(id).stream()
+                .map(RoomService::buildRoomDto)
+                .collect(Collectors.toList());
+    }
+
     public void save(Room room) {
         roomRepository.save(room);
     }
@@ -43,7 +49,26 @@ public class RoomService {
     }
 
 
+
     public void deleteById(Long id) {
         roomRepository.deleteById(id);
     }
+
+    public Optional<Room> findRoomByName(String name) {
+        return roomRepository.findRoomByName(name);
+    }
+    public Optional<Room> deleteRoomByName(String name) {
+        return roomRepository.deleteRoomByName(name);
+    }
+//    public Optional<Room> findById(Long id) {
+//        return roomRepository.findById(id);
+//    }
+
+    public Optional<Room> findByFloor(int floor) {
+        return roomRepository.findByFloor(floor);
+    }
+
+
+
+
 }
