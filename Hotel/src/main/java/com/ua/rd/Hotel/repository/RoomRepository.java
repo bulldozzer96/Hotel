@@ -1,6 +1,7 @@
 package com.ua.rd.Hotel.repository;
 
 import com.ua.rd.Hotel.domain.Room;
+import com.ua.rd.Hotel.dto.RoomDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.data.repository.CrudRepository;
@@ -13,13 +14,11 @@ import java.util.Optional;
 
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
-    Optional<Room> findRoomByName(String name);
-
-    Optional<Room> deleteRoomByName(String name);
 
     Optional<Room> findByFloor(int floor);
 
-    Optional<Room> findById(Long id);
+
+//    Optional<Room> findById(Long id);
 
 
 

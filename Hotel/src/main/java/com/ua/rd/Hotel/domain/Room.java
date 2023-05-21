@@ -6,7 +6,7 @@ import lombok.*;
 
 
 @Data
-@Table
+@Table()
 @Entity
 @Builder
 @NoArgsConstructor
@@ -26,7 +26,6 @@ public class Room {
     @ManyToOne
     @JoinColumn(name = "roomStatus_id")
     private RoomStatus roomStatus_id;
-
 
 
 }

@@ -5,7 +5,9 @@ import com.ua.rd.Hotel.domain.Room;
 
 import com.ua.rd.Hotel.dto.RoomDto;
 import com.ua.rd.Hotel.repository.RoomRepository;
+import com.ua.rd.Hotel.repository.RoomStatusRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -24,19 +26,20 @@ public class RoomService {
                         .collect(Collectors.toList());
     }
 
-    public List<RoomDto> findById(Long id) {
-        return roomRepository.findById(id).stream()
-                .map(RoomService::buildRoomDto)
-                .collect(Collectors.toList());
+    public Optional<Room> findById(Long id) {
+        return roomRepository.findById(id);
     }
+
+
+    public Optional<Room> findByFloor(int floor) {
+        return roomRepository.findByFloor(floor);
+    }
+
 
     public void save(Room room) {
         roomRepository.save(room);
     }
 
-//    public void deleteById(Long id) {
-//        roomRepository.deleteById(id);
-//    }
 
 
     private static RoomDto buildRoomDto(Room room) {
@@ -45,8 +48,19 @@ public class RoomService {
                 .name(room.getName())
                 .floor(room.getFloor())
                 .price(room.getPrice())
+                .roomStatus(room.getRoomStatus_id().getName())
                 .build();
     }
+
+//    public void addStatus(Long roomId, Long statusId) {
+//
+//        var status = RoomStatusRepository.findById(statusId).get();
+//        var room = RoomRepository.findById(roomId).get();
+//        room.setRoomStatus_id(status);
+//
+//        roomRepository.save(room);
+//    }
+
 
 
 
@@ -54,19 +68,9 @@ public class RoomService {
         roomRepository.deleteById(id);
     }
 
-    public Optional<Room> findRoomByName(String name) {
-        return roomRepository.findRoomByName(name);
-    }
-    public Optional<Room> deleteRoomByName(String name) {
-        return roomRepository.deleteRoomByName(name);
-    }
-//    public Optional<Room> findById(Long id) {
-//        return roomRepository.findById(id);
-//    }
 
-    public Optional<Room> findByFloor(int floor) {
-        return roomRepository.findByFloor(floor);
-    }
+
+
 
 
 

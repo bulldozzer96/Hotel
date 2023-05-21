@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,17 +23,18 @@ public class RoomController {
         return ResponseEntity.ok(roomService.findAll());
     }
     @GetMapping("/rooms/id/{id}")
-    public ResponseEntity <List<RoomDto>> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(roomService.findById(id));
+    public ResponseEntity <Room> findById(@PathVariable Long id) {
+        return roomService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
-
-
-
     @GetMapping("/rooms/floor/{floor}")
-    public ResponseEntity<Optional<Room>> findByFloor(@PathVariable(value = "floor") int floor) {
-        return ResponseEntity.ok(roomService.findByFloor(floor));
-
+    public ResponseEntity<Room> findByFloor(@PathVariable int floor) {
+        return roomService.findByFloor(floor)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
+
 
     @PostMapping("/rooms")
     public ResponseEntity<Void> save(@RequestBody Room room) {
@@ -47,11 +47,11 @@ public class RoomController {
         roomService.deleteById(id);
     }
 
-
-
-//    @DeleteMapping("/rooms/deleteN/{name}")
-//    public void deleteByRoomName(@PathVariable(value = "name") String name){
-//        roomService.deleteRoomByName(name);
+//    @PostMapping("/rooms/{id}/status/{roomStatus_id}")
+//    public ResponseEntity<Void> update(@PathVariable Long id, @PathVariable Long roomStatus_id) {
+//        roomService.addStatus(id, roomStatus_id);
+//
+//        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 //    }
 
 
