@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface RoomStatusRepository extends JpaRepository<RoomStatus, Long> {
 
-//   Optional <RoomStatus> findById(Long id);
+
 }

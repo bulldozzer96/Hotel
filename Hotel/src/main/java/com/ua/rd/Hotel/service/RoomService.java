@@ -5,9 +5,7 @@ import com.ua.rd.Hotel.domain.Room;
 
 import com.ua.rd.Hotel.dto.RoomDto;
 import com.ua.rd.Hotel.repository.RoomRepository;
-import com.ua.rd.Hotel.repository.RoomStatusRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -26,20 +24,21 @@ public class RoomService {
                         .collect(Collectors.toList());
     }
 
+
+
     public Optional<Room> findById(Long id) {
         return roomRepository.findById(id);
     }
 
-
-    public Optional<Room> findByFloor(int floor) {
-        return roomRepository.findByFloor(floor);
-    }
 
 
     public void save(Room room) {
         roomRepository.save(room);
     }
 
+    public Optional<Room> getRoomById(Long id) {
+        return roomRepository.findById(id);
+    }
 
 
     private static RoomDto buildRoomDto(Room room) {
@@ -67,6 +66,7 @@ public class RoomService {
     public void deleteById(Long id) {
         roomRepository.deleteById(id);
     }
+
 
 
 

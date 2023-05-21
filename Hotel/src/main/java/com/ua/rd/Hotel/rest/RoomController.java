@@ -5,35 +5,38 @@ import com.ua.rd.Hotel.dto.RoomDto;
 import com.ua.rd.Hotel.service.RoomService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
 
 
 public class RoomController {
+
+    @Autowired
     private final RoomService roomService;
 
     @GetMapping("/rooms")
     public ResponseEntity<List<RoomDto>> findAll() {
         return ResponseEntity.ok(roomService.findAll());
     }
-    @GetMapping("/rooms/id/{id}")
-    public ResponseEntity <Room> findById(@PathVariable Long id) {
-        return roomService.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-    @GetMapping("/rooms/floor/{floor}")
-    public ResponseEntity<Room> findByFloor(@PathVariable int floor) {
-        return roomService.findByFloor(floor)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
+
+
+
+//    @GetMapping("/room/{id}")
+//    public ResponseEntity<Optional<Room>> findById(@PathVariable Long id) {
+//        return ResponseEntity.ok(roomService.findById(id));
+//    }
+@GetMapping("/room/{id}")
+public Optional<Room> getRoomById(@PathVariable Long id) {
+    return roomService.getRoomById(id);
+}
 
 
     @PostMapping("/rooms")
@@ -42,7 +45,7 @@ public class RoomController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @DeleteMapping("/rooms/{id}")
+    @DeleteMapping("/room/{id}")
     public void deleteRoom(@PathVariable(value = "id") Long id){
         roomService.deleteById(id);
     }
