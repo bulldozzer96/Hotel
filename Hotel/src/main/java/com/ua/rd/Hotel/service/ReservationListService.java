@@ -18,7 +18,7 @@ public class ReservationListService {
 
     private final ReservationListRepository reservationListRepository;
 
-    public List<ReservationListDto> getAllReservations() {
+    public List<ReservationListDto> findAll() {
         return reservationListRepository.findAll().stream()
                 .map(ReservationListService::buildReservationListDto)
                         .collect(Collectors.toList());
@@ -33,8 +33,13 @@ public class ReservationListService {
                 .checkOut(reservationList.getCheckOut())
                 .roomName(reservationList.getRoomId().getName())
                 .clientName(reservationList.getClients_id().getName())
-
-
                 .build();
     }
+
+
+    public void save(ReservationList reservationList) {
+        reservationListRepository.save(reservationList);
+    }
+
+
 }

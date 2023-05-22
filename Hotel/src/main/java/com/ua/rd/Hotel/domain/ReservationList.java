@@ -2,6 +2,8 @@ package com.ua.rd.Hotel.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import com.ua.rd.Hotel.domain.Clients;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,8 +20,11 @@ public class ReservationList {
     private Long id;
 
     @Column
+    @DateTimeFormat(pattern = "dd.mm.yyyy")
     private LocalDate checkIn;
+
     @Column
+    @DateTimeFormat(pattern = "dd.mm.yyyy")
     private LocalDate checkOut;
 
 //    @Column
