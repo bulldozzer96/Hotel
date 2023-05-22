@@ -26,8 +26,8 @@ public class RoomService {
 
 
 
-    public Optional<Room> findById(Long id) {
-        return roomRepository.findById(id);
+    public Optional<RoomDto> findById(Long id) {
+        return roomRepository.findById(id).map(RoomService::buildRoomDto);
     }
 
 
@@ -36,9 +36,9 @@ public class RoomService {
         roomRepository.save(room);
     }
 
-    public Optional<Room> getRoomById(Long id) {
-        return roomRepository.findById(id);
-    }
+//    public Optional<RoomDto> getRoomById(Long id) {
+//        return roomRepository.findById(id);
+//    }
 
 
     private static RoomDto buildRoomDto(Room room) {

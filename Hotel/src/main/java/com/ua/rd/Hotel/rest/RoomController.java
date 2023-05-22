@@ -34,8 +34,8 @@ public class RoomController {
 //        return ResponseEntity.ok(roomService.findById(id));
 //    }
 @GetMapping("/room/{id}")
-public Optional<Room> getRoomById(@PathVariable Long id) {
-    return roomService.getRoomById(id);
+public Optional<RoomDto> findById(@PathVariable Long id) {
+    return roomService.findById(id);
 }
 
 
