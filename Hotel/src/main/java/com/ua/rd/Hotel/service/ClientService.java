@@ -29,7 +29,7 @@ public void save(Clients clients) {
 
         return ClientDto.builder()
                 .name(clients.getName())
-                .roomName(clients.getName())
+
                 .build();
     }
 

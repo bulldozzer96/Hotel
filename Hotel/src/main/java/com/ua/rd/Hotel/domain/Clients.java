@@ -19,11 +19,5 @@ public class Clients {
     @Column
     private String name;
 
-    @ManyToMany
-    @JoinTable(
-            name = "reservation_list",
-            joinColumns = @JoinColumn(name = "clients_id"),
-            inverseJoinColumns = @JoinColumn(name = "room_id"))
-    List<Clients> list_reservation;
 
 }

@@ -24,17 +24,12 @@ public class Room {
     private int price;
     @Column
     private int floor;
-    @Column
-    private Long occupiedBy;
-
 
 
     @ManyToOne
     @JoinColumn(name = "roomStatus_id")
     private RoomStatus roomStatus_id;
 
-    @ManyToMany(mappedBy = "list_reservation")
-    private List<Clients> list_reservation;
 
 
 }

@@ -22,4 +22,14 @@ public class ReservationList {
     @Column
     private LocalDate checkOut;
 
+    @Column
+    private String roomName;
+
+    @Column
+    private Long occupiedBy;
+
+
+
+
+
 }

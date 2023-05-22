@@ -9,6 +9,6 @@ import lombok.Data;
 @Builder
 public class ClientDto {
     private String name;
-    private String roomName;
+
 
 }

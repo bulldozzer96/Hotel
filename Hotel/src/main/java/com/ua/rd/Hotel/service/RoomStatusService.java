@@ -26,11 +26,11 @@ public class RoomStatusService {
     public List<RoomStatusDto> findAll() {
         return roomStatusRepository.findAll()
                 .stream()
-                .map(RoomStatusService::buildCountryDto)
+                .map(RoomStatusService::buildRoomStatusDto)
                 .collect(Collectors.toList());
     }
 
-    private static RoomStatusDto buildCountryDto(RoomStatus roomStatus) {
+    private static RoomStatusDto buildRoomStatusDto(RoomStatus roomStatus) {
         return RoomStatusDto.builder()
                 .id(roomStatus.getId())
                 .name(roomStatus.getName())
