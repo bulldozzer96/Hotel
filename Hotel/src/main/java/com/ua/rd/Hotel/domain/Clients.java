@@ -19,5 +19,9 @@ public class Clients {
     @Column
     private String name;
 
+    @OneToMany(mappedBy = "clients_id")
+    private List<ReservationList> reservationList;
+
+
 
 }

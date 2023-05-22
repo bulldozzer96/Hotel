@@ -30,6 +30,9 @@ public class Room {
     @JoinColumn(name = "roomStatus_id")
     private RoomStatus roomStatus_id;
 
+    @OneToMany(mappedBy = "roomId")
+    private List<ReservationList> reservationList;
+
 
 
 }

@@ -1,6 +1,7 @@
 package com.ua.rd.Hotel.service;
 
 
+import com.ua.rd.Hotel.domain.ReservationList;
 import com.ua.rd.Hotel.domain.Room;
 
 import com.ua.rd.Hotel.dto.RoomDto;
@@ -66,12 +67,6 @@ public class RoomService {
     public void deleteById(Long id) {
         roomRepository.deleteById(id);
     }
-
-
-
-
-
-
 
 
 
