@@ -1,4 +1,6 @@
 package com.ua.rd.Hotel.domain;
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 import com.ua.rd.Hotel.domain.Clients;
@@ -20,11 +22,13 @@ public class ReservationList {
     private Long id;
 
     @Column
-    @DateTimeFormat(pattern = "dd.mm.yyyy")
+    //@DateTimeFormat(pattern = "dd.MM.yyyy")
+   @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate checkIn;
 
     @Column
-    @DateTimeFormat(pattern = "dd.mm.yyyy")
+    //@DateTimeFormat(pattern = "dd.MM.yyyy")
+    @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate checkOut;
 
 //    @Column

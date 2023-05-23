@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,8 +29,10 @@ public class ReservationListController {
 
     @PostMapping("/reservations")
     public ResponseEntity<Void> save(@RequestBody ReservationList reservationList) {
+
         reservationListService.save(reservationList);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
 
 }
