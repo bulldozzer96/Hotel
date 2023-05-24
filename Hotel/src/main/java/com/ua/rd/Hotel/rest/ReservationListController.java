@@ -35,12 +35,7 @@ public class ReservationListController {
     }
 
 
-//    @PostMapping("/reservations")
-//    @ResponseStatus(value = HttpStatus.CREATED)
-//    public ResponseEntity<ReservationList> save(@Validated @RequestBody ReservationList reservationList) {
-//        reservationListService.save(reservationList);
-//        return ResponseEntity.ok().body(reservationList);
-//    }
+
 
 
 }

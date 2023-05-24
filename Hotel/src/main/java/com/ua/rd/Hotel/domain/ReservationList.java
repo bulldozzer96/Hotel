@@ -1,6 +1,8 @@
 package com.ua.rd.Hotel.domain;
+
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import jakarta.persistence.*;
 import lombok.*;
 import com.ua.rd.Hotel.domain.Clients;
@@ -25,55 +27,23 @@ public class ReservationList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd.MM.yyyy")
-    //@Column(name = "checkIn")
-//    @Temporal(TemporalType.DATE)
-//    //@DateTimeFormat(pattern = "dd.MM.yyyy")
-//    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd.MM.yyyy")
-//
-//    private LocalDate checkIn;
-//    @Column
-//    //@DateTimeFormat(pattern = "dd.MM.yyyy")
-//   @JsonFormat(pattern = "dd/MM/yyyy")
-//   private LocalDate checkIn;
-//   // private String checkIn;
-
-
-
+    @Column(name = "checkIn")
     @Temporal(TemporalType.DATE)
-    private Date checkIn = new Date();
 
+    private LocalDate checkIn;
 
+    @Column(name = "checkOut")
     @Temporal(TemporalType.DATE)
-    private Date checkOut = new Date();
 
-    //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd.MM.yyyy")
-    //@Column(name = "checkOut")
-//    @Temporal(TemporalType.DATE)
-//    //@DateTimeFormat(pattern = "dd.MM.yyyy")
-//    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd.MM.yyyy")
-//    private LocalDate checkOut;
-//    @Column
-//    //@DateTimeFormat(pattern = "dd.MM.yyyy")
-//    @JsonFormat(pattern = "dd/MM/yyyy")
-//    private LocalDate checkOut;
-//   // private String checkOut;
-
-//    @Column
-//    private Long roomId;
-
-
-
+    private LocalDate checkOut;
 
     @ManyToOne
     @JoinColumn(name = "clients_id")
-    private Clients clients_id;
+    private Clients clients_id;//fix name
 
     @ManyToOne
     @JoinColumn(name = "room_id")
     private Room roomId;
-
 
 }
 

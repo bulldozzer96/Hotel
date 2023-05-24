@@ -9,9 +9,12 @@ import java.util.Date;
 @Data
 @Builder
 public class ReservationListDto {
-    private Date checkIn;
-    private Date checkOut;
+    private LocalDate checkIn;
+    private LocalDate checkOut;
     private String roomName;
     private String clientName;
+
+
+
 
 }
