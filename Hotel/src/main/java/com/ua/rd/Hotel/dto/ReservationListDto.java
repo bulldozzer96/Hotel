@@ -1,4 +1,5 @@
 package com.ua.rd.Hotel.dto;
+import com.ua.rd.Hotel.domain.ReservationList;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,7 +14,6 @@ public class ReservationListDto {
     private LocalDate checkOut;
     private String roomName;
     private String clientName;
-
 
 
 

@@ -9,6 +9,7 @@ import java.util.List;
 @Builder
 public class ClientDto {
     private String name;
+
     private List<String> reservations;
 
 

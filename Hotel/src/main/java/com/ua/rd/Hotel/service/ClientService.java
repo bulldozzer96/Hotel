@@ -2,7 +2,9 @@ package com.ua.rd.Hotel.service;
 
 
 import com.ua.rd.Hotel.domain.Clients;
+import com.ua.rd.Hotel.domain.ReservationList;
 import com.ua.rd.Hotel.dto.ClientDto;
+import com.ua.rd.Hotel.dto.ReservationListDto;
 import com.ua.rd.Hotel.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,10 @@ public void save(Clients clients) {
 
         return ClientDto.builder()
                 .name(clients.getName())
+                .reservations(clients.getReservationList()
+                        .stream()
+                        .map(reservationList -> reservationList.getRoomId().getName())
+                        .collect(Collectors.toList()))
 
                 .build();
     }
