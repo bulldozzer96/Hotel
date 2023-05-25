@@ -39,6 +39,7 @@ public class ReservationListService {
 
 
         return ReservationListDto.builder()
+                .orderDate(reservationList.getOrderDate())
                 .checkIn(reservationList.getCheckIn())
                 .checkOut(reservationList.getCheckOut())
                 .roomName(reservationList.getRoomId().getName())
@@ -50,8 +51,7 @@ public class ReservationListService {
     public void save(ReservationList reservationList) {
 
 
-
-
+        reservationList.setOrderDate(new Date());
 
 
         reservationListRepository.save(reservationList);

@@ -29,13 +29,21 @@ public class ReservationList {
 
     @Column(name = "checkIn")
     @Temporal(TemporalType.DATE)
-
     private LocalDate checkIn;
 
     @Column(name = "checkOut")
     @Temporal(TemporalType.DATE)
-
     private LocalDate checkOut;
+
+    @Column(name = "orderDate")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date orderDate;
+
+//    public Date setOrderDate(Date orderDate) {
+//        this.orderDate = orderDate;
+//        return orderDate;
+//    }
+
 
     @ManyToOne
     @JoinColumn(name = "clients_id")

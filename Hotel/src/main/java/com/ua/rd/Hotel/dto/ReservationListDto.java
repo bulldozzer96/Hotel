@@ -11,6 +11,7 @@ import java.util.Date;
 @Builder
 public class ReservationListDto {
     private LocalDate checkIn;
+    private Date orderDate;
     private LocalDate checkOut;
     private String roomName;
     private String clientName;

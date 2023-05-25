@@ -1,7 +1,9 @@
 package com.ua.rd.Hotel.dto;
+
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -10,7 +12,8 @@ import java.util.List;
 public class ClientDto {
     private String name;
 
-    private List<String> reservations;
+    private List<Long> reservationsId;
+    //private List<LocalDate> reservationsDate;
 
 
 }
