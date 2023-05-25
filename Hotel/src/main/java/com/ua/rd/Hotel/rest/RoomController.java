@@ -28,15 +28,14 @@ public class RoomController {
     }
 
 
-
-//    @GetMapping("/room/{id}")
+    //    @GetMapping("/room/{id}")
 //    public ResponseEntity<Optional<Room>> findById(@PathVariable Long id) {
 //        return ResponseEntity.ok(roomService.findById(id));
 //    }
-@GetMapping("/room/{id}")
-public Optional<RoomDto> findById(@PathVariable Long id) {
-    return roomService.findById(id);
-}
+    @GetMapping("/room/{id}")
+    public Optional<RoomDto> findById(@PathVariable Long id) {
+        return roomService.findById(id);
+    }
 
 
     @PostMapping("/rooms")
@@ -46,17 +45,16 @@ public Optional<RoomDto> findById(@PathVariable Long id) {
     }
 
     @DeleteMapping("/room/{id}")
-    public void deleteRoom(@PathVariable(value = "id") Long id){
+    public void deleteRoom(@PathVariable(value = "id") Long id) {
         roomService.deleteById(id);
     }
 
-//    @PostMapping("/rooms/{id}/status/{roomStatus_id}")
-//    public ResponseEntity<Void> update(@PathVariable Long id, @PathVariable Long roomStatus_id) {
-//        roomService.addStatus(id, roomStatus_id);
-//
-//        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
-//    }
+    @PostMapping("/rooms/{id}/status/{roomStatusId}")
+    public ResponseEntity<Void> update(@PathVariable Long id, @PathVariable Long roomStatusId) {
+        roomService.addStatus(id, roomStatusId);
 
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
 
 
 }

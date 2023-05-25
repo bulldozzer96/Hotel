@@ -39,15 +39,12 @@ public class ReservationList {
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderDate;
 
-//    public Date setOrderDate(Date orderDate) {
-//        this.orderDate = orderDate;
-//        return orderDate;
-//    }
+
 
 
     @ManyToOne
-    @JoinColumn(name = "clients_id")
-    private Clients clients_id;//fix name
+    @JoinColumn(name = "clients_Id")
+    private Clients clientsId;
 
     @ManyToOne
     @JoinColumn(name = "room_id")

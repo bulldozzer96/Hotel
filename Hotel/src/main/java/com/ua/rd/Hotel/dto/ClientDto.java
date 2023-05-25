@@ -11,6 +11,10 @@ import java.util.List;
 @Builder
 public class ClientDto {
     private String name;
+    private String surname;
+    private String passport;
+    private String phone;
+
 
     private List<Long> reservationsId;
     //private List<LocalDate> reservationsDate;

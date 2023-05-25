@@ -7,7 +7,7 @@ import java.util.Optional;
 
 
 @Data
-@Table
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "phone","passport"}) })
 @Entity
 @Builder
 @NoArgsConstructor
@@ -18,8 +18,15 @@ public class Clients {
     private Long id;
     @Column
     private String name;
+    @Column
+    private String surname;
+    @Column
+    private String passport;
+    @Column
+    private String phone;
 
-    @OneToMany(mappedBy = "clients_id")
+
+    @OneToMany(mappedBy = "clientsId")
     private List<ReservationList> reservationList;
 
 

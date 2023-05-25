@@ -6,6 +6,7 @@ import com.ua.rd.Hotel.domain.Room;
 import com.ua.rd.Hotel.dto.ReservationListDto;
 import com.ua.rd.Hotel.dto.RoomDto;
 import com.ua.rd.Hotel.repository.ReservationListRepository;
+import com.ua.rd.Hotel.repository.RoomRepository;
 import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
 
@@ -27,7 +28,7 @@ public class ReservationListService {
 
     @Autowired
     private final ReservationListRepository reservationListRepository;
-
+    private final RoomRepository roomRepository;
     public List<ReservationListDto> findAll() {
         return reservationListRepository.findAll().stream()
                 .map(ReservationListService::buildReservationListDto)
@@ -43,7 +44,7 @@ public class ReservationListService {
                 .checkIn(reservationList.getCheckIn())
                 .checkOut(reservationList.getCheckOut())
                 .roomName(reservationList.getRoomId().getName())
-                .clientName(reservationList.getClients_id().getName())
+                .clientName(reservationList.getClientsId().getName())
                 .build();
     }
 
@@ -55,6 +56,15 @@ public class ReservationListService {
 
 
         reservationListRepository.save(reservationList);
+    }
+
+    public void changeRoom(Long roomId, Long reservationId) {
+
+        var reservation = reservationListRepository.findById(reservationId).get();
+        var room = roomRepository.findById(roomId).get();
+        reservation.setRoomId(room);
+
+        reservationListRepository.save(reservation);
     }
 
 

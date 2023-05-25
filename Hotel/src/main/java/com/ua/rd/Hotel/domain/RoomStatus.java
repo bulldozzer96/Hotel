@@ -18,7 +18,7 @@ public class RoomStatus {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "roomStatus_id")
+    @OneToMany(mappedBy = "roomStatusId")
     private List<Room> room;
 
 

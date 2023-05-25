@@ -10,7 +10,7 @@ import lombok.Data;
 public class RoomDto {
 
     private String name;
-    private int price;
+
     private int floor;
     private String roomStatus;
 
