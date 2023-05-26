@@ -29,10 +29,14 @@ public class ReservationListService {
     @Autowired
     private final ReservationListRepository reservationListRepository;
     private final RoomRepository roomRepository;
+
     public List<ReservationListDto> findAll() {
-        return reservationListRepository.findAll().stream()
-                .map(ReservationListService::buildReservationListDto)
-                .collect(Collectors.toList());
+
+
+        return reservationListRepository.findAll()
+                        .stream()
+                        .map(ReservationListService::buildReservationListDto)
+                        .collect(Collectors.toList());
     }
 
 
@@ -51,10 +55,13 @@ public class ReservationListService {
 
     public void save(ReservationList reservationList) {
 
-
         reservationList.setOrderDate(new Date());
 
-
+        if (reservationList.getCheckIn().isAfter(reservationList.getCheckOut())) {
+            throw new IllegalArgumentException("Check-in date must be before check-out date");
+        }else if (reservationList.getCheckOut().isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("Check-out date can`t be in the past");
+        }else
         reservationListRepository.save(reservationList);
     }
 
@@ -67,5 +74,23 @@ public class ReservationListService {
         reservationListRepository.save(reservation);
     }
 
+//    public Optional<ReservationList> findByCheckIn(LocalDate checkIn) {
+//        return reservationListRepository.findByCheckIn(checkIn);
+//    }
+//
+//    public Optional<ReservationList> findByCheckOut(LocalDate checkOut) {
+//        return reservationListRepository.findByCheckOut(checkOut);
+//    }
+
+//    public Optional<ReservationList> findAllByCheckInLessThanEqualAndCheckOutGreaterThanEqual(LocalDate checkIn, LocalDate checkOut) {
+//
+//        return reservationListRepository.findAllByCheckInLessThanEqualAndCheckOutGreaterThanEqual(checkIn, checkOut);
+//
+//    }
+//
+//    public Optional<ReservationList> findAllAvailableForReservationRooms(LocalDate checkIn, LocalDate checkOut) {
+//
+//        return reservationListRepository.findAllAvailableForReservationRooms(checkIn, checkOut);
+//    }
 
 }

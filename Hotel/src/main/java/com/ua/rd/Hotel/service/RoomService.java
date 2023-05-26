@@ -9,7 +9,7 @@ import com.ua.rd.Hotel.repository.RoomRepository;
 import com.ua.rd.Hotel.repository.RoomStatusRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.*;
 import java.util.stream.Collectors;
