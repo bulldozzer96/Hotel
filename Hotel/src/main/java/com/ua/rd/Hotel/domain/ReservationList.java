@@ -43,7 +43,7 @@ public class ReservationList {
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "clients_Id")
     private Clients clientsId;
 

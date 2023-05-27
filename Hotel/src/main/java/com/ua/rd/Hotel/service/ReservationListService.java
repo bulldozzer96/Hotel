@@ -1,15 +1,16 @@
 package com.ua.rd.Hotel.service;
 
 import com.ua.rd.Hotel.domain.ReservationList;
+
 import com.ua.rd.Hotel.dto.ReservationListDto;
 import com.ua.rd.Hotel.repository.ReservationListRepository;
 import com.ua.rd.Hotel.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
 
 
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ public class ReservationListService {
     @Autowired
     private final ReservationListRepository reservationListRepository;
     private final RoomRepository roomRepository;
+
 
     public List<ReservationListDto> findAll() {
         return reservationListRepository.findAll()
@@ -42,16 +44,17 @@ public class ReservationListService {
                 .build();
     }
 
+
     public void save(ReservationList reservationList) {
 
         reservationList.setOrderDate(new Date());
         reservationList.setStatus(1);
 
 
-            if (!isReserveExists(reservationList)) {
-                reservationListRepository.save(reservationList);
-            }
-        throw new InvalidDataAccessApiUsageException("Reservation already exists");
+//        if (isReserveExists(reservationList)) {
+//            throw new IllegalArgumentException("Reservation already exists");
+//        }
+        reservationListRepository.save(reservationList);
 
     }
 
@@ -65,7 +68,7 @@ public class ReservationListService {
         reservationListRepository.save(reservation);
     }
 
-    @Scheduled(fixedRate = 160000)
+    @Scheduled(fixedRate = 60000)
     private void updateBookingStatus() {
         List<ReservationList> reservationList = reservationListRepository.findAll();
         LocalDate currentDate = LocalDate.now();
@@ -86,11 +89,14 @@ public class ReservationListService {
         }
     }
 
-    private boolean isReserveExists(ReservationList reservationList) {
-        return reservationListRepository.existsByRoomIdAndCheckInAndCheckOut(
-                reservationList.getRoomId().getId(), reservationList.getCheckIn(), reservationList.getCheckOut());
-    }
+//    private boolean isReserveExists(ReservationList reservationList) {
+//        return reservationListRepository.existsByRoomIdAndCheckInAndCheckOut(
+//                reservationList.getRoomId().getId(), reservationList.getCheckIn(), reservationList.getCheckOut());
+//    }
 
+    public void deleteById(Long id) {
+        reservationListRepository.deleteById(id);
+    }
 
 
 }

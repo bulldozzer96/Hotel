@@ -18,6 +18,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+
 @RequiredArgsConstructor
 public class RoomService {
 
@@ -56,8 +57,6 @@ public class RoomService {
         return roomRepository.findById(id).map(RoomService::buildRoomDto);
     }
 
-
-
     @Transactional
     public void save(Room room) {
         try {
@@ -81,9 +80,6 @@ public class RoomService {
 
     public void deleteById(Long id) {
         roomRepository.deleteById(id);
-    }
-    public Optional<Room> findByIdUpdate(Long id) {
-        return roomRepository.findById(id);
     }
 
 }

@@ -34,6 +34,10 @@ public void save(Clients clients) {
 
         return ClientDto.builder()
                 .name(clients.getName())
+                .surname(clients.getSurname())
+                .passport(clients.getPassport())
+                .phone(clients.getPhone())
+                .sex(clients.getSex())
                 .reservationsId(clients.getReservationList()
                         .stream()
                         .map(reservationList -> reservationList.getId())
@@ -42,14 +46,8 @@ public void save(Clients clients) {
                 .build();
     }
 
+
     public Optional<Clients> findById(Long id) {
         return clientRepository.findById(id);
-    }
-
-    public Optional<Clients> findBySurname(String surname) {
-        return clientRepository.findBySurname(surname);
-    }
-    public Optional<Clients> findByPassport(String passport) {
-        return clientRepository.findByPassport(passport);
     }
 }

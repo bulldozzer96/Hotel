@@ -42,15 +42,10 @@ public class RoomController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-//    @DeleteMapping("/room/{id}")
-//    public ResponseEntity<Object> deleteRoom(@PathVariable(value = "id") Long id) {
-//        Optional<Room> room = roomService.findByIdUpdate(id);
-//        if (room.isEmpty()) {
-//            return ResponseEntity.notFound().build();
-//        }
-//        roomService.deleteById(id);
-//        return null;
-//    }
+    @DeleteMapping("/room/{id}")
+    public void deleteRoom(@PathVariable(value = "id") Long id) {
+        roomService.deleteById(id);
+    }
 
 
     @GetMapping("/rooms/unreserved")
@@ -71,29 +66,6 @@ public class RoomController {
              @RequestParam("checkOutDate")
              LocalDate checkOut) {
         return roomService.findRoomsNotReservationListInRange(checkIn, checkOut);
-    }
-
-    @PutMapping("/room/{id}")
-    public ResponseEntity<Void> updateRoom(@PathVariable("id") Long id, @RequestBody RoomDto roomDto) {
-        Optional<Room> optionalRoom = roomService.findByIdUpdate(id);
-
-        if (optionalRoom.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        Room room = optionalRoom.get();
-
-
-        room.setName(roomDto.getName());
-        room.setCapacity(roomDto.getCapacity());
-        room.setFloor(roomDto.getFloor());
-        room.setNumberOfBeds(roomDto.getNumberOfBeds());
-
-
-
-        roomService.save(room);
-
-        return ResponseEntity.ok().build();
     }
 
 }

@@ -28,6 +28,7 @@ public class ReservationListController {
     public ResponseEntity<Void> save(@RequestBody ReservationList reservationList) {
 
         reservationListService.save(reservationList);
+
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -37,6 +38,11 @@ public class ReservationListController {
         reservationListService.changeRoom(roomId, reservationId);
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+    @DeleteMapping("/reservations/{reservationId}")
+    public void delete(@PathVariable Long reservationId) {
+        reservationListService.deleteById(reservationId);
     }
 
 
