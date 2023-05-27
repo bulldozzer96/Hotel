@@ -64,7 +64,6 @@ public class RoomService {
             if ((room.getName().startsWith(String.valueOf(room.getFloor())))) {
                 roomRepository.save(room);
             }
-
         } catch (Exception e) {
             throw new IllegalArgumentException("Room name must start with floor number");
         }

@@ -6,8 +6,10 @@ import com.ua.rd.Hotel.repository.ReservationListRepository;
 import com.ua.rd.Hotel.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -22,8 +24,6 @@ public class ReservationListService {
     private final RoomRepository roomRepository;
 
     public List<ReservationListDto> findAll() {
-
-
         return reservationListRepository.findAll()
                 .stream()
                 .map(ReservationListService::buildReservationListDto)
@@ -31,8 +31,6 @@ public class ReservationListService {
     }
 
     private static ReservationListDto buildReservationListDto(ReservationList reservationList) {
-
-
         return ReservationListDto.builder()
                 .orderDate(reservationList.getOrderDate())
                 .checkIn(reservationList.getCheckIn())
@@ -51,7 +49,13 @@ public class ReservationListService {
 //        } else if (reservationList.getCheckOut().isBefore(LocalDate.now())) {
 //            throw new IllegalArgumentException("Check-out date can`t be in the past");
 //        } else
-        reservationListRepository.save(reservationList);
+try {
+    if (!isReserveExists(reservationList)) {
+    }
+    reservationListRepository.save(reservationList);
+} catch (InvalidDataAccessApiUsageException e) {
+    throw new InvalidDataAccessApiUsageException("Reservation already exists");
+}
     }
 
     public void changeRoom(Long roomId, Long reservationId) {
@@ -62,7 +66,7 @@ public class ReservationListService {
         reservationListRepository.save(reservation);
     }
 
-    @Scheduled(fixedRate = 60000) // Run every 1 minute (60000 milliseconds)
+    @Scheduled(fixedRate = 60000)
     private void updateBookingStatus() {
         List<ReservationList> reservationList = reservationListRepository.findAll();
         LocalDate currentDate = LocalDate.now();
@@ -70,17 +74,22 @@ public class ReservationListService {
         for (ReservationList reservations : reservationList) {
             if (reservations.getStatus() == null || reservations.getStatus() == 1) {
                 if (currentDate.isAfter(reservations.getCheckOut())) {
-                    reservations.setStatus(2); // Set to pastReservations (2)
+                    reservations.setStatus(2);
                     reservationListRepository.save(reservations);
                 }
             } else if (reservations.getStatus() == 2) {
                 if (currentDate.isBefore(reservations.getCheckOut())) {
-                    reservations.setStatus(1); // Set to active (1)
+                    reservations.setStatus(1);
                     reservationListRepository.save(reservations);
                 }
             }
 
         }
+    }
+
+    private boolean isReserveExists(ReservationList reservationList) {
+        return reservationListRepository.existsByRoomIdAndCheckInAndCheckOut(
+                reservationList.getRoomId().getId(), reservationList.getCheckIn(), reservationList.getCheckOut());
     }
 }
 
