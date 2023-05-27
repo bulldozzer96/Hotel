@@ -2,12 +2,12 @@ package com.ua.rd.Hotel.domain;
 
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
+
 import lombok.*;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
+
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.transaction.annotation.Transactional;
+
 
 
 import java.time.LocalDate;

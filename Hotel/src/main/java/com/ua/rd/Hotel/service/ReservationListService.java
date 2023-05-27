@@ -44,18 +44,14 @@ public class ReservationListService {
 
         reservationList.setOrderDate(new Date());
         reservationList.setStatus(1);
-//        if (reservationList.getCheckIn().isAfter(reservationList.getCheckOut())) {
-//            throw new IllegalArgumentException("Check-in date must be before check-out date");
-//        } else if (reservationList.getCheckOut().isBefore(LocalDate.now())) {
-//            throw new IllegalArgumentException("Check-out date can`t be in the past");
-//        } else
-try {
-    if (!isReserveExists(reservationList)) {
-    }
-    reservationListRepository.save(reservationList);
-} catch (InvalidDataAccessApiUsageException e) {
-    throw new InvalidDataAccessApiUsageException("Reservation already exists");
-}
+
+        try {
+            if (!isReserveExists(reservationList)) {
+            }
+            reservationListRepository.save(reservationList);
+        } catch (InvalidDataAccessApiUsageException e) {
+            throw new InvalidDataAccessApiUsageException("Reservation already exists");
+        }
     }
 
     public void changeRoom(Long roomId, Long reservationId) {

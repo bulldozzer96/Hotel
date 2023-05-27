@@ -1,11 +1,10 @@
 package com.ua.rd.Hotel.service;
 
 
-
 import com.ua.rd.Hotel.domain.Room;
 
 import com.ua.rd.Hotel.dto.RoomDto;
-import com.ua.rd.Hotel.repository.ReservationListRepository;
+
 import com.ua.rd.Hotel.repository.RoomRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -28,7 +27,7 @@ public class RoomService {
     public List<RoomDto> findAll() {
         return roomRepository.findAll().stream()
                 .map(RoomService::buildRoomDto)
-                        .collect(Collectors.toList());
+                .collect(Collectors.toList());
     }
 
     public List<String> findRoomNamesNotReservedInRange(LocalDate checkIn, LocalDate checkOut) {

@@ -49,7 +49,7 @@ public class RoomController {
 
 
     @GetMapping("/rooms/unreserved")
-    public List<String> getUnbookedRoomNames
+    public List<String> getUnreservedRoomNames
             (@RequestParam("checkInDate")
 
              LocalDate checkIn,
@@ -60,7 +60,7 @@ public class RoomController {
     }
 
     @GetMapping("/rooms/unreserved/all")
-    public List<RoomDto> getUnbookedRooms
+    public List<RoomDto> getUnreservedRooms
             (@RequestParam("checkInDate")
              LocalDate checkIn,
              @RequestParam("checkOutDate")

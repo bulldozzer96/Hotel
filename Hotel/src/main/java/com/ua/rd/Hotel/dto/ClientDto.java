@@ -17,7 +17,7 @@ public class ClientDto {
 
 
     private List<Long> reservationsId;
-    //private List<LocalDate> reservationsDate;
+
 
 
 }
