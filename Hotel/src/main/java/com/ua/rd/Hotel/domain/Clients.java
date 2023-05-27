@@ -1,4 +1,5 @@
 package com.ua.rd.Hotel.domain;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -7,7 +8,7 @@ import java.util.Optional;
 
 
 @Data
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "phone","passport"}) })
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"phone", "passport"})})
 @Entity
 @Builder
 @NoArgsConstructor
@@ -28,7 +29,6 @@ public class Clients {
 
     @OneToMany(mappedBy = "clientsId")
     private List<ReservationList> reservationList;
-
 
 
 }

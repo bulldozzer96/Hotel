@@ -31,12 +31,10 @@ public class RoomController {
         return ResponseEntity.ok(roomService.findAll());
     }
 
-
     @GetMapping("/room/{id}")
     public Optional<RoomDto> findById(@PathVariable Long id) {
         return roomService.findById(id);
     }
-
 
     @PostMapping("/rooms")
     public ResponseEntity<Void> save(@RequestBody Room room) {
@@ -48,7 +46,6 @@ public class RoomController {
     public void deleteRoom(@PathVariable(value = "id") Long id) {
         roomService.deleteById(id);
     }
-
 
 
     @GetMapping("/rooms/unreserved")
@@ -70,6 +67,5 @@ public class RoomController {
              LocalDate checkOut) {
         return roomService.findRoomsNotReservationListInRange(checkIn, checkOut);
     }
-
 
 }

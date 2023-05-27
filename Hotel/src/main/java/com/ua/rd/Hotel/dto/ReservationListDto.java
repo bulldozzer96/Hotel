@@ -1,5 +1,5 @@
 package com.ua.rd.Hotel.dto;
-import com.ua.rd.Hotel.domain.ReservationList;
+
 import lombok.Builder;
 import lombok.Data;
 

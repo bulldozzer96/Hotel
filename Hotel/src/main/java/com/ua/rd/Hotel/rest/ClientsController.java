@@ -1,10 +1,7 @@
 package com.ua.rd.Hotel.rest;
 import com.ua.rd.Hotel.domain.Clients;
-import com.ua.rd.Hotel.domain.Room;
 import com.ua.rd.Hotel.dto.ClientDto;
-import com.ua.rd.Hotel.dto.RoomDto;
 import com.ua.rd.Hotel.service.ClientService;
-import com.ua.rd.Hotel.service.RoomService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +29,6 @@ public class ClientsController {
         clientService.save(clients);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-
 
 
 }

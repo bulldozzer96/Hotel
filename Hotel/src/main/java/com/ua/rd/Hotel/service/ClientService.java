@@ -35,7 +35,6 @@ public void save(Clients clients) {
                 .reservationsId(clients.getReservationList()
                         .stream()
                         .map(reservationList -> reservationList.getId())
-
                         .collect(Collectors.toList()))
 
                 .build();

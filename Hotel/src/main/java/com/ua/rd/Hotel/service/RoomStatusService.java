@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 public class RoomStatusService {
 
-
     private final RoomStatusRepository roomStatusRepository;
 
     public void save(RoomStatus roomStatus) {

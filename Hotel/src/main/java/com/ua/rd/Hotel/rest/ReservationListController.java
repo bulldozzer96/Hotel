@@ -24,9 +24,6 @@ public class ReservationListController {
         return ResponseEntity.ok(reservationListService.findAll());
     }
 
-
-
-
     @PostMapping("/reservations")
     public ResponseEntity<Void> save(@RequestBody ReservationList reservationList) {
 
@@ -41,13 +38,6 @@ public class ReservationListController {
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
-
-
-
-
-
-
-
 
 
 }

@@ -24,9 +24,6 @@ import java.util.stream.Collectors;
 public class RoomService {
 
     private final RoomRepository roomRepository;
-    private final RoomStatusRepository roomStatusRepository;
-    private final ReservationListRepository reservationListRepository;
-
 
     public List<RoomDto> findAll() {
         return roomRepository.findAll().stream()
@@ -78,11 +75,8 @@ public class RoomService {
                 .build();
     }
 
-
     public void deleteById(Long id) {
         roomRepository.deleteById(id);
     }
-
-
 
 }
