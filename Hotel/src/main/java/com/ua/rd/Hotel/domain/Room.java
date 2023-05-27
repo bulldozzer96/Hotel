@@ -26,16 +26,17 @@ public class Room {
 
     @Column
     private int floor;
+    @Column
+    private int numberOfBeds;
+    @Column
+    private int capacity;
 
 
-    @ManyToOne
-    @JoinColumn(name = "roomStatus_id")
-    private RoomStatus roomStatusId;
+
 
 
     @OneToMany(mappedBy = "roomId")
     private List<ReservationList> reservationList;
-
 
 
 }

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 
 @Data
@@ -25,6 +25,8 @@ public class Clients {
     private String passport;
     @Column
     private String phone;
+    @Column
+    private String sex;
 
 
     @OneToMany(mappedBy = "clientsId")

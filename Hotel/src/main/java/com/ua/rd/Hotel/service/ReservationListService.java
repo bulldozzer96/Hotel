@@ -6,6 +6,7 @@ import com.ua.rd.Hotel.repository.ReservationListRepository;
 import com.ua.rd.Hotel.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.*;
@@ -44,13 +45,13 @@ public class ReservationListService {
     public void save(ReservationList reservationList) {
 
         reservationList.setOrderDate(new Date());
-
-        if (reservationList.getCheckIn().isAfter(reservationList.getCheckOut())) {
-            throw new IllegalArgumentException("Check-in date must be before check-out date");
-        } else if (reservationList.getCheckOut().isBefore(LocalDate.now())) {
-            throw new IllegalArgumentException("Check-out date can`t be in the past");
-        } else
-            reservationListRepository.save(reservationList);
+        reservationList.setStatus(1);
+//        if (reservationList.getCheckIn().isAfter(reservationList.getCheckOut())) {
+//            throw new IllegalArgumentException("Check-in date must be before check-out date");
+//        } else if (reservationList.getCheckOut().isBefore(LocalDate.now())) {
+//            throw new IllegalArgumentException("Check-out date can`t be in the past");
+//        } else
+        reservationListRepository.save(reservationList);
     }
 
     public void changeRoom(Long roomId, Long reservationId) {
@@ -61,7 +62,26 @@ public class ReservationListService {
         reservationListRepository.save(reservation);
     }
 
+    @Scheduled(fixedRate = 60000) // Run every 1 minute (60000 milliseconds)
+    private void updateBookingStatus() {
+        List<ReservationList> reservationList = reservationListRepository.findAll();
+        LocalDate currentDate = LocalDate.now();
 
+        for (ReservationList reservations : reservationList) {
+            if (reservations.getStatus() == null || reservations.getStatus() == 1) {
+                if (currentDate.isAfter(reservations.getCheckOut())) {
+                    reservations.setStatus(2); // Set to pastReservations (2)
+                    reservationListRepository.save(reservations);
+                }
+            } else if (reservations.getStatus() == 2) {
+                if (currentDate.isBefore(reservations.getCheckOut())) {
+                    reservations.setStatus(1); // Set to active (1)
+                    reservationListRepository.save(reservations);
+                }
+            }
+
+        }
+    }
 }
 
 

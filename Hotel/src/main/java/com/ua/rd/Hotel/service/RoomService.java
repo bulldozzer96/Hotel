@@ -7,11 +7,11 @@ import com.ua.rd.Hotel.domain.Room;
 import com.ua.rd.Hotel.dto.RoomDto;
 import com.ua.rd.Hotel.repository.ReservationListRepository;
 import com.ua.rd.Hotel.repository.RoomRepository;
-import com.ua.rd.Hotel.repository.RoomStatusRepository;
+
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.time.LocalDate;
@@ -43,6 +43,8 @@ public class RoomService {
         for (Room room : rooms) {
             RoomDto roomDto = RoomDto.builder()
                     .name(room.getName())
+                    .capacity(room.getCapacity())
+                    .numberOfBeds(room.getNumberOfBeds())
                     .floor(room.getFloor())
                     .build();
             roomDtos.add(roomDto);
@@ -56,22 +58,25 @@ public class RoomService {
         return roomRepository.findById(id).map(RoomService::buildRoomDto);
     }
 
+    @Transactional
     public void save(Room room) {
+        try {
+            if ((room.getName().startsWith(String.valueOf(room.getFloor())))) {
+                roomRepository.save(room);
+            }
 
-        if ((room.getName().startsWith(String.valueOf(room.getFloor())))) {
-            roomRepository.save(room);
-        } else {
+        } catch (Exception e) {
             throw new IllegalArgumentException("Room name must start with floor number");
         }
-
     }
 
     private static RoomDto buildRoomDto(Room room) {
 
         return RoomDto.builder()
                 .name(room.getName())
+                .capacity(room.getCapacity())
+                .numberOfBeds(room.getNumberOfBeds())
                 .floor(room.getFloor())
-
                 .build();
     }
 

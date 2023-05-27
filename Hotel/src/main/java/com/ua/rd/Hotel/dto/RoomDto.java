@@ -8,5 +8,7 @@ import lombok.Data;
 public class RoomDto {
 
     private String name;
+    private int capacity;
+    private int numberOfBeds;
     private int floor;
 }

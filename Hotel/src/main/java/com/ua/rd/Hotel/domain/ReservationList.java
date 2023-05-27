@@ -2,7 +2,13 @@ package com.ua.rd.Hotel.domain;
 
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -14,7 +20,8 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
+@EnableScheduling
+@EnableTransactionManagement
 
 public class ReservationList {
     @Id
@@ -29,6 +36,9 @@ public class ReservationList {
     @Temporal(TemporalType.DATE)
     private LocalDate checkOut;
 
+    @Column(name = "status")
+    private Integer status;
+
     @Column(name = "orderDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderDate;
@@ -41,8 +51,8 @@ public class ReservationList {
     @JoinColumn(name = "room_id")
     private Room roomId;
 
-}
 
+}
 
 
 
