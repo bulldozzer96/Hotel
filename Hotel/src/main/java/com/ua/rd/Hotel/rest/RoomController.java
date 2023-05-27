@@ -1,6 +1,8 @@
 package com.ua.rd.Hotel.rest;
 
+import com.ua.rd.Hotel.domain.ReservationList;
 import com.ua.rd.Hotel.domain.Room;
+import com.ua.rd.Hotel.dto.ReservationListDto;
 import com.ua.rd.Hotel.dto.RoomDto;
 import com.ua.rd.Hotel.service.RoomService;
 
@@ -10,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,6 +58,8 @@ public class RoomController {
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
+
+
 
 
 }
