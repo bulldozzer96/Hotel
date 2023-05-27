@@ -47,14 +47,15 @@ public class ReservationListService {
         reservationList.setOrderDate(new Date());
         reservationList.setStatus(1);
 
-        try {
+
             if (!isReserveExists(reservationList)) {
+                reservationListRepository.save(reservationList);
             }
-            reservationListRepository.save(reservationList);
-        } catch (InvalidDataAccessApiUsageException e) {
-            throw new InvalidDataAccessApiUsageException("Reservation already exists");
-        }
+        throw new InvalidDataAccessApiUsageException("Reservation already exists");
+
     }
+
+
 
     public void changeRoom(Long roomId, Long reservationId) {
 
@@ -64,13 +65,13 @@ public class ReservationListService {
         reservationListRepository.save(reservation);
     }
 
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 160000)
     private void updateBookingStatus() {
         List<ReservationList> reservationList = reservationListRepository.findAll();
         LocalDate currentDate = LocalDate.now();
 
         for (ReservationList reservations : reservationList) {
-            if (reservations.getStatus() == null || reservations.getStatus() == 1) {
+            if (reservations.getStatus() == 1) {
                 if (currentDate.isAfter(reservations.getCheckOut())) {
                     reservations.setStatus(2);
                     reservationListRepository.save(reservations);
@@ -88,10 +89,6 @@ public class ReservationListService {
     private boolean isReserveExists(ReservationList reservationList) {
         return reservationListRepository.existsByRoomIdAndCheckInAndCheckOut(
                 reservationList.getRoomId().getId(), reservationList.getCheckIn(), reservationList.getCheckOut());
-    }
-
-    public void deleteById(Long reservationId) {
-        reservationListRepository.deleteById(reservationId);
     }
 
 

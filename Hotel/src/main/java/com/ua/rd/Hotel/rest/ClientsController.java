@@ -38,10 +38,7 @@ public class ClientsController {
         if (optionalClient.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-
         Clients client = optionalClient.get();
-
-
         client.setName(clientsDto.getName());
         client.setSurname(clientsDto.getSurname());
         client.setPassport(clientsDto.getPassport());
@@ -51,6 +48,15 @@ public class ClientsController {
         clientService.save(client);
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/client/surname/{surname}")
+    public Optional<Clients> findBySurname(@PathVariable("surname") String surname) {
+        return clientService.findBySurname(surname);
+    }
+    @GetMapping("/client/passport/{passport}")
+    public Optional<Clients> findByPassport(@PathVariable("passport") String passport) {
+        return clientService.findByPassport(passport);
     }
 
 }

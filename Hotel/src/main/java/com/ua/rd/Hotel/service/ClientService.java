@@ -45,4 +45,11 @@ public void save(Clients clients) {
     public Optional<Clients> findById(Long id) {
         return clientRepository.findById(id);
     }
+
+    public Optional<Clients> findBySurname(String surname) {
+        return clientRepository.findBySurname(surname);
+    }
+    public Optional<Clients> findByPassport(String passport) {
+        return clientRepository.findByPassport(passport);
+    }
 }

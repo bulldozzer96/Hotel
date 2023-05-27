@@ -39,10 +39,5 @@ public class ReservationListController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
-    @DeleteMapping("/reservations/{reservationId}")
-    public void delete(@PathVariable Long reservationId) {
-        reservationListService.deleteById(reservationId);
-    }
-
 
 }

@@ -21,4 +21,6 @@ public interface ReservationListRepository extends JpaRepository<ReservationList
             @Param("checkIn") LocalDate checkIn,
             @Param("checkOut") LocalDate checkOut);
 
+
+
 }

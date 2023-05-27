@@ -42,15 +42,15 @@ public class RoomController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @DeleteMapping("/room/{id}")
-    public ResponseEntity<Object> deleteRoom(@PathVariable(value = "id") Long id) {
-        Optional<Room> room = roomService.findByIdUpdate(id);
-        if (room.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        roomService.deleteById(id);
-        return null;
-    }
+//    @DeleteMapping("/room/{id}")
+//    public ResponseEntity<Object> deleteRoom(@PathVariable(value = "id") Long id) {
+//        Optional<Room> room = roomService.findByIdUpdate(id);
+//        if (room.isEmpty()) {
+//            return ResponseEntity.notFound().build();
+//        }
+//        roomService.deleteById(id);
+//        return null;
+//    }
 
 
     @GetMapping("/rooms/unreserved")
