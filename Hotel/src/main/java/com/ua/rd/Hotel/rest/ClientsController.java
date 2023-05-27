@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -30,5 +31,26 @@ public class ClientsController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @PutMapping("/clients/{id}")
+    public ResponseEntity<Void> updateClient(@PathVariable("id") Long id, @RequestBody ClientDto clientsDto) {
+        Optional<Clients> optionalClient = clientService.findById(id);
+
+        if (optionalClient.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Clients client = optionalClient.get();
+
+
+        client.setName(clientsDto.getName());
+        client.setSurname(clientsDto.getSurname());
+        client.setPassport(clientsDto.getPassport());
+        client.setPhone(clientsDto.getPhone());
+        client.setSex(clientsDto.getSex());
+
+        clientService.save(client);
+
+        return ResponseEntity.ok().build();
+    }
 
 }

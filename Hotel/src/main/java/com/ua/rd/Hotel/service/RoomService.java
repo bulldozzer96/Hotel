@@ -81,5 +81,8 @@ public class RoomService {
     public void deleteById(Long id) {
         roomRepository.deleteById(id);
     }
+    public Optional<Room> findByIdUpdate(Long id) {
+        return roomRepository.findById(id);
+    }
 
 }

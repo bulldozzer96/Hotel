@@ -14,6 +14,7 @@ public class ClientDto {
     private String surname;
     private String passport;
     private String phone;
+    private String sex;
 
 
     private List<Long> reservationsId;

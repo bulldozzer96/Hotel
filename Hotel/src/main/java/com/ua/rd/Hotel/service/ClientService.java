@@ -7,7 +7,9 @@ import com.ua.rd.Hotel.dto.ClientDto;
 
 import com.ua.rd.Hotel.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
+
 
 
 import java.util.*;
@@ -40,5 +42,7 @@ public void save(Clients clients) {
                 .build();
     }
 
-
+    public Optional<Clients> findById(Long id) {
+        return clientRepository.findById(id);
+    }
 }

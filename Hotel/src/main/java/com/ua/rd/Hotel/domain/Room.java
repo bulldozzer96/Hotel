@@ -32,9 +32,6 @@ public class Room {
     private int capacity;
 
 
-
-
-
     @OneToMany(mappedBy = "roomId")
     private List<ReservationList> reservationList;
 
