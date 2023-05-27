@@ -1,7 +1,7 @@
 package com.ua.rd.Hotel.service;
 
 
-import com.ua.rd.Hotel.domain.ReservationList;
+
 import com.ua.rd.Hotel.domain.Room;
 
 import com.ua.rd.Hotel.dto.RoomDto;
@@ -9,7 +9,9 @@ import com.ua.rd.Hotel.repository.ReservationListRepository;
 import com.ua.rd.Hotel.repository.RoomRepository;
 import com.ua.rd.Hotel.repository.RoomStatusRepository;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
+
 
 
 import java.time.LocalDate;
@@ -31,16 +33,26 @@ public class RoomService {
                 .map(RoomService::buildRoomDto)
                         .collect(Collectors.toList());
     }
-//    public List<RoomDto> findAllAvailableForReservationRooms(LocalDate checkIn, LocalDate checkOut) {
-//        return roomRepository.findAllAvailableForReservationRooms(checkIn, checkOut).stream()
-//                .map((Room room) -> buildRoomDto(room))
-//                        .collect(Collectors.toList());
-//    }
+
+    public List<String> findRoomNamesNotReservedInRange(LocalDate checkIn, LocalDate checkOut) {
+        return roomRepository.findRoomNamesNotReservationListInRange(checkIn, checkOut);
+    }
+
+    public List<RoomDto> findRoomsNotReservationListInRange(LocalDate checkInDate, LocalDate checkOutDate) {
+        List<Room> rooms = roomRepository.findRoomsNotReservationListInRange(checkInDate, checkOutDate);
 
 
+        List<RoomDto> roomDtos = new ArrayList<>();
+        for (Room room : rooms) {
+            RoomDto roomDto = RoomDto.builder()
+                    .name(room.getName())
+                    .floor(room.getFloor())
+                    .build();
+            roomDtos.add(roomDto);
+        }
 
-
-
+        return roomDtos;
+    }
 
 
     public Optional<RoomDto> findById(Long id) {
@@ -57,29 +69,14 @@ public class RoomService {
 
     }
 
-
     private static RoomDto buildRoomDto(Room room) {
 
         return RoomDto.builder()
                 .name(room.getName())
                 .floor(room.getFloor())
-                .roomStatus(room.getRoomStatusId().getName())
+
                 .build();
     }
-
-
-
-
-    public void addStatus(Long roomId, Long statusId) {
-
-        var status = roomStatusRepository.findById(statusId).get();
-        var room = roomRepository.findById(roomId).get();
-        room.setRoomStatusId(status);
-
-        roomRepository.save(room);
-    }
-
-
 
 
     public void deleteById(Long id) {

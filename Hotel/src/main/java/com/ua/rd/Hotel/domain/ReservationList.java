@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-@Table
+@Table(name = "reservationList")
 @Entity
 @Builder
 @NoArgsConstructor
@@ -46,7 +46,7 @@ public class ReservationList {
     @JoinColumn(name = "clients_Id")
     private Clients clientsId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne/*(fetch = FetchType.LAZY)*/
     @JoinColumn(name = "room_id")
     private Room roomId;
 

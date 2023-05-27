@@ -2,8 +2,9 @@ package com.ua.rd.Hotel.service;
 
 import com.ua.rd.Hotel.domain.ReservationList;
 
+
 import com.ua.rd.Hotel.dto.ReservationListDto;
-import com.ua.rd.Hotel.dto.RoomDto;
+
 import com.ua.rd.Hotel.repository.ReservationListRepository;
 import com.ua.rd.Hotel.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
@@ -77,6 +78,12 @@ public class ReservationListService {
 
 
 
+    }
 
 
-}
+
+
+
+
+
+

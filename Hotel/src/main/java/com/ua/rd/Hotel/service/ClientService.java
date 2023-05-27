@@ -2,14 +2,14 @@ package com.ua.rd.Hotel.service;
 
 
 import com.ua.rd.Hotel.domain.Clients;
-import com.ua.rd.Hotel.domain.ReservationList;
+
 import com.ua.rd.Hotel.dto.ClientDto;
-import com.ua.rd.Hotel.dto.ReservationListDto;
+
 import com.ua.rd.Hotel.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -41,26 +41,5 @@ public void save(Clients clients) {
                 .build();
     }
 
-
-
-//          return ClientDto.builder()
-//                  .name(clients.getName())
-//            .reservations(clients.getReservationList()
-//                        .stream()
-//                        .map(ReservationList::getCheckIn)
-//                        .map(checkIn -> "CheckIn: " + checkIn)
-//            .collect(Collectors.toList()))
-//            .reservationsDate(clients.getReservationList()
-//                        .stream().map(ReservationList::getCheckOut).collect(Collectors.toList()))
-//
-//            .reservations(clients.getReservationList()
-//                        .stream()
-//                        .map(reservationList -> reservationList.getRoomId().getName())
-//            .map(roomName -> "Room: " + roomName)
-//            .collect(Collectors.toList()))
-//
-//
-//            .build();
-//}
 
 }
