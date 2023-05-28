@@ -98,6 +98,25 @@ public class ClientsControllerTest {
 
     @Test
     public void findBySurname() throws Exception {
+        String surname = "ABC123";
+        ClientDto clientDto = ClientDto.builder()
+                .name("John")
+                .surname(surname)
+                .passport("ABC123")
+                .phone("1234567890")
+                .sex("Male")
+                .build();
+
+        when(clientsService.findBySurname("ABC123")).thenReturn(clientDto);
+
+
+        mockMvc.perform(get("/client/surname/{surname}", surname))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is("John")))
+                .andExpect(jsonPath("$.surname", is(surname)))
+                .andExpect(jsonPath("$.passport", is("ABC123")))
+                .andExpect(jsonPath("$.phone", is("1234567890")))
+                .andExpect(jsonPath("$.sex", is("Male")));
 
     }
 
