@@ -1,15 +1,12 @@
 package com.ua.rd.Hotel.repository;
 
-import com.ua.rd.Hotel.domain.Clients;
 import com.ua.rd.Hotel.domain.ReservationList;
-import com.ua.rd.Hotel.dto.ReservationListDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Repository
 public interface ReservationListRepository extends JpaRepository<ReservationList, Long> {
@@ -23,8 +20,5 @@ public interface ReservationListRepository extends JpaRepository<ReservationList
             @Param("roomId") Long roomId,
             @Param("checkIn") LocalDate checkIn,
             @Param("checkOut") LocalDate checkOut);
-
-
-
-
+    
 }

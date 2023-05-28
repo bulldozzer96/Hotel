@@ -3,13 +3,12 @@ package com.ua.rd.Hotel.service;
 
 import com.ua.rd.Hotel.domain.Clients;
 
+
 import com.ua.rd.Hotel.dto.ClientDto;
 
 import com.ua.rd.Hotel.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Service;
-
 
 
 import java.util.*;
@@ -23,7 +22,7 @@ public class ClientService {
 
     public List<ClientDto> findAll() {
         return clientRepository.findAll().stream()
-                .map(ClientService::buildClientDto)
+                .map((Clients clients) -> buildClientDto(clients))
                 .collect(Collectors.toList());
     }
 
@@ -38,16 +37,33 @@ public void save(Clients clients) {
                 .passport(clients.getPassport())
                 .phone(clients.getPhone())
                 .sex(clients.getSex())
+//                .reservationStatusName(clients.getReservationList()
+//                        .stream()
+//                        .map(reservationList -> reservationList.getStatusName())
+//                        .collect(Collectors.toList()))
                 .reservationsId(clients.getReservationList()
                         .stream()
                         .map(reservationList -> reservationList.getId())
                         .collect(Collectors.toList()))
+               .build();
+    }
 
-                .build();
+    public ClientDto findBySurname(String surname) {
+        return buildClientDto(clientRepository.findBySurname(surname));
     }
 
 
-    public Optional<Clients> findById(Long id) {
-        return clientRepository.findById(id);
+    public ClientDto findByPassport(String passport) {
+        return buildClientDto(clientRepository.findByPassport(passport));
     }
+
+    public Clients findById(Long id) {
+        return clientRepository.findById(id).get();
+    }
+
+
+
+
+
+
 }

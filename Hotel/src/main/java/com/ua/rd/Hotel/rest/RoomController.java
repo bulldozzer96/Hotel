@@ -48,16 +48,7 @@ public class RoomController {
     }
 
 
-    @GetMapping("/rooms/unreserved")
-    public List<String> getUnreservedRoomNames
-            (@RequestParam("checkInDate")
 
-             LocalDate checkIn,
-             @RequestParam("checkOutDate")
-
-             LocalDate checkOut) {
-        return roomService.findRoomNamesNotReservedInRange(checkIn, checkOut);
-    }
 
     @GetMapping("/rooms/unreserved/all")
     public List<RoomDto> getUnreservedRooms
@@ -67,5 +58,28 @@ public class RoomController {
              LocalDate checkOut) {
         return roomService.findRoomsNotReservationListInRange(checkIn, checkOut);
     }
+
+    @PutMapping("/room/{id}")
+    public ResponseEntity<Void> updateRoom(@PathVariable("id") Long id, @RequestBody RoomDto roomDto) {
+        Optional<Room> optionalRoom = roomService.findByIdUpdate(id);
+
+        if (optionalRoom.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Room room = optionalRoom.get();
+
+
+        room.setName(roomDto.getName());
+        room.setCapacity(roomDto.getCapacity());
+        room.setFloor(roomDto.getFloor());
+        room.setNumberOfBeds(roomDto.getNumberOfBeds());
+
+
+        roomService.save(room);
+
+        return ResponseEntity.ok().build();
+    }
+
 
 }

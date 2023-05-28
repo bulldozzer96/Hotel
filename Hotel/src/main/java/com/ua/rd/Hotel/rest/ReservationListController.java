@@ -28,7 +28,6 @@ public class ReservationListController {
     public ResponseEntity<Void> save(@RequestBody ReservationList reservationList) {
 
         reservationListService.save(reservationList);
-
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
