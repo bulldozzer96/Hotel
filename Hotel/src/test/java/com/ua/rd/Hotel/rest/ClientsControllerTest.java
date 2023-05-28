@@ -11,11 +11,12 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -33,6 +34,7 @@ public class ClientsControllerTest {
     @InjectMocks
     private ClientsController clientsController;
     private MockMvc mockMvc;
+
     @Before
     public void setUp() {
         mockMvc = MockMvcBuilders.standaloneSetup(clientsController).build();
@@ -43,10 +45,7 @@ public class ClientsControllerTest {
 
         List<ClientDto> clientList = new ArrayList<>();
         clientList.add(ClientDto.builder().name("John").surname("Doe").passport("ABC123").phone("1234567890").sex("Male").build());
-
-
         clientList.add(ClientDto.builder().name("Jane").surname("Smith").passport("DEF456").phone("9876543210").sex("Female").build());
-
         when(clientsService.findAll()).thenReturn(clientList);
         mockMvc.perform(get("/clients"))
                 .andExpect(status().isOk())
@@ -75,11 +74,31 @@ public class ClientsControllerTest {
     }
 
     @Test
-    public void findByPassport() {
+    public void findByPassport() throws Exception {
+        String passport = "ABC123";
+        ClientDto clientDto = ClientDto.builder()
+                .name("John")
+                .surname("Doe")
+                .passport(passport)
+                .phone("1234567890")
+                .sex("Male")
+                .build();
+
+        when(clientsService.findByPassport("ABC123")).thenReturn(clientDto);
+
+
+        mockMvc.perform(get("/client/passport/{passport}", passport))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is("John")))
+                .andExpect(jsonPath("$.surname", is("Doe")))
+                .andExpect(jsonPath("$.passport", is(passport)))
+                .andExpect(jsonPath("$.phone", is("1234567890")))
+                .andExpect(jsonPath("$.sex", is("Male")));
     }
 
     @Test
-    public void findBySurname() {
+    public void findBySurname() throws Exception {
+
     }
 
     @Test
