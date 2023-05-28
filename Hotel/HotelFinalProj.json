@@ -1,0 +1,282 @@
+{
+  "info": {
+    "_postman_id": "59059e49-343b-4eed-9513-ade61a11f108",
+    "name": "Hotel",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+    "_exporter_id": "27395653"
+  },
+  "item": [
+    {
+      "name": "rooms",
+      "item": [
+        {
+          "name": "get all rooms",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8080/rooms"
+          },
+          "response": []
+        },
+        {
+          "name": "get room by id",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8080/room/{id)"
+          },
+          "response": []
+        },
+        {
+          "name": "get all avalilable rooms by params",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/rooms/unreserved/all?checkInDate=2023-01-25&checkOutDate=2023-01-28",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "rooms",
+                "unreserved",
+                "all"
+              ],
+              "query": [
+                {
+                  "key": "checkInDate",
+                  "value": "2023-01-25"
+                },
+                {
+                  "key": "checkOutDate",
+                  "value": "2023-01-28"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "del room by id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://localhost:8080/room/{id)"
+          },
+          "response": []
+        },
+        {
+          "name": "add room",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  " "
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"305\",\r\n    \"floor\": 3,\r\n    \"capacity\": 4,\r\n    \"numberOfBeds\": 3\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8080/rooms"
+          },
+          "response": []
+        },
+        {
+          "name": "update room by id",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n        \"name\": \"305\",\r\n        \"capacity\": 3,\r\n        \"numberOfBeds\": 3,\r\n        \"floor\" : 3\r\n        \r\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8080/room/{id}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "reservations",
+      "item": [
+        {
+          "name": "add reservation",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  " "
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"clientsId\": {\"id\": 3},\r\n    \"roomId\": {\"id\": 16},\r\n    \"checkIn\": \"2023-01-15\",\r\n    \"checkOut\": \"2023-01-26\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8080/reservations"
+          },
+          "response": []
+        },
+        {
+          "name": "relocate client by room and reservationId",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "http://localhost:8080/reservations/{reservationId}/room/{roomId}"
+          },
+          "response": []
+        },
+        {
+          "name": "delete reservation by id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://localhost:8080/reservations/{id}"
+          },
+          "response": []
+        },
+        {
+          "name": "get all reservations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8080/reservations"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "clients",
+      "item": [
+        {
+          "name": "change client info by id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": " {\r\n        \"name\": \"Sarah\",\r\n        \"surname\": \"Connor\",\r\n        \"passport\": \"TT1000\",\r\n        \"phone\": \"+8383579820\",\r\n        \"sex\": \"Female\"\r\n    }\r\n ",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8080/client/{id}"
+          },
+          "response": []
+        },
+        {
+          "name": "add client",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Sarah\",\r\n    \"surname\": \"Connor\",\r\n    \"passport\": \"TT1000\",\r\n    \"phone\": \"+83832589258\",\r\n    \"sex\": \"Female\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8080/clients"
+          },
+          "response": []
+        },
+        {
+          "name": "get all clients",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8080/clients"
+          },
+          "response": []
+        },
+        {
+          "name": "get client by surname",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8080/client/surname/{surname}"
+          },
+          "response": []
+        },
+        {
+          "name": "get client by passport",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "http://localhost:8080/client/passport/{passport}"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
