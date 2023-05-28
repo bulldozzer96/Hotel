@@ -26,7 +26,6 @@ public class ReservationListController {
 
     @PostMapping("/reservations")
     public ResponseEntity<Void> save(@RequestBody ReservationList reservationList) {
-
         reservationListService.save(reservationList);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -35,7 +34,6 @@ public class ReservationListController {
     @PostMapping("/reservations/{reservationId}/room/{roomId}")
     public ResponseEntity<Void> update(@PathVariable Long roomId, @PathVariable Long reservationId) {
         reservationListService.changeRoom(roomId, reservationId);
-
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
