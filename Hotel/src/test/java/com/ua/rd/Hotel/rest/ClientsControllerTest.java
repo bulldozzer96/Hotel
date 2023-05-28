@@ -59,7 +59,7 @@ public class ClientsControllerTest {
                 .andExpect(jsonPath("$[1].surname", is("Smith")))
                 .andExpect(jsonPath("$[1].passport", is("DEF456")))
                 .andExpect(jsonPath("$[1].phone", is("9876543210")))
-                .andExpect(jsonPath("$[0].sex", is("Female")));
+                .andExpect(jsonPath("$[1].sex", is("Female")));
     }
 
 
@@ -71,7 +71,7 @@ public class ClientsControllerTest {
         mockMvc.perform(post("/clients")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
 
     @Test
