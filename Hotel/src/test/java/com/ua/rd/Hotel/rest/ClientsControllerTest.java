@@ -42,8 +42,10 @@ public class ClientsControllerTest {
     public void findAll() throws Exception {
 
         List<ClientDto> clientList = new ArrayList<>();
-        clientList.add(new ClientDto("John", "Doe", "ABC123", "1234567890"));
-        clientList.add(new ClientDto("Jane", "Smith", "DEF456", "9876543210"));
+        clientList.add(ClientDto.builder().name("John").surname("Doe").passport("ABC123").phone("1234567890").sex("Male").build());
+
+
+        clientList.add(ClientDto.builder().name("Jane").surname("Smith").passport("DEF456").phone("9876543210").sex("Female").build());
 
         when(clientsService.findAll()).thenReturn(clientList);
         mockMvc.perform(get("/clients"))
@@ -52,16 +54,18 @@ public class ClientsControllerTest {
                 .andExpect(jsonPath("$[0].surname", is("Doe")))
                 .andExpect(jsonPath("$[0].passport", is("ABC123")))
                 .andExpect(jsonPath("$[0].phone", is("1234567890")))
+                .andExpect(jsonPath("$[0].sex", is("Male")))
                 .andExpect(jsonPath("$[1].name", is("Jane")))
                 .andExpect(jsonPath("$[1].surname", is("Smith")))
                 .andExpect(jsonPath("$[1].passport", is("DEF456")))
-                .andExpect(jsonPath("$[1].phone", is("9876543210")));
+                .andExpect(jsonPath("$[1].phone", is("9876543210")))
+                .andExpect(jsonPath("$[0].sex", is("Female")));
     }
 
 
     @Test
     public void save() throws Exception {
-        ClientDto clientDto = new ClientDto("John", "Doe", "ABC123", "1234567890");
+        ClientDto clientDto = ClientDto.builder().name("John").surname("Doe").passport("ABC123").phone("1234567890").sex("Male").build();
         String requestBody = new ObjectMapper().writeValueAsString(clientDto);
 
         mockMvc.perform(post("/clients")

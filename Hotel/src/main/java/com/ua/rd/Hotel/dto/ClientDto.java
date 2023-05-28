@@ -19,7 +19,7 @@ public class ClientDto {
 
     private List<Long> reservationsId;
 //    private List<String> reservationStatusName;
- 
+
 
 
 }
