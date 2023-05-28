@@ -1,22 +1,30 @@
 package com.ua.rd.Hotel.rest;
 
+import com.ua.rd.Hotel.domain.Clients;
 import com.ua.rd.Hotel.dto.ClientDto;
 import com.ua.rd.Hotel.service.ClientService;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.ArrayList;
 import java.util.List;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -27,6 +35,8 @@ import static org.hamcrest.Matchers.is;
 
 import static org.junit.Assert.*;;
 
+
+@ExtendWith(MockitoExtension.class)
 @RunWith(MockitoJUnitRunner.class)
 public class ClientsControllerTest {
     @Mock
@@ -121,6 +131,67 @@ public class ClientsControllerTest {
     }
 
     @Test
-    public void updateClient() {
+    public void updateById() throws Exception {
+
+        Long clientId = 1L;
+        ClientDto updatedClientDto = ClientDto.builder()
+                .name("John")
+                .surname("Doe")
+                .passport("ABC123")
+                .phone("9876543210")
+                .sex("Male")
+                .build();
+
+
+        when(clientsService.findById(anyLong())).thenReturn(new Clients());
+
+
+        mockMvc.perform(put("/client/{id}", clientId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(updatedClientDto)))
+                .andExpect(status().isOk());
+
+
+
+
+//        Long clientId = 1L;
+//        ClientDto updatedClientDto = ClientDto.builder()
+//                .name("John")
+//                .surname("Doe")
+//                .passport("ABC123")
+//                .phone("9876543210")
+//                .sex("Male")
+//                .build();
+//
+//        Clients existingClient = new Clients();
+//        existingClient.setId(clientId);
+//        existingClient.setName("Jane");
+//        existingClient.setSurname("Smith");
+//        existingClient.setPassport("DEF456");
+//        existingClient.setPhone("1234567890");
+//        existingClient.setSex("Female");
+//
+//        when(clientsService.findById(anyLong())).thenReturn(existingClient);
+//
+//
+//        mockMvc.perform(put("/client/{id}", clientId)
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content("{ \"name\": \"John\", \"surname\": \"Doe\", \"passport\": \"ABC123\", \"phone\": \"9876543210\", \"sex\": \"Male\" }"))
+//                .andExpect(status().isOk());
+//
+//        assertEquals("John", existingClient.getName());
+//        assertEquals("Doe", existingClient.getSurname());
+//        assertEquals("ABC123", existingClient.getPassport());
+//        assertEquals("9876543210", existingClient.getPhone());
+//        assertEquals("Male", existingClient.getSex());
+//
+
     }
-}
+
+
+    private static String asJsonString(Object object) throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(object);
+    }
+
+    }
