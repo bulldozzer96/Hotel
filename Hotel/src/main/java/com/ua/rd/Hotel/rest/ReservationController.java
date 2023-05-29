@@ -1,6 +1,6 @@
 package com.ua.rd.Hotel.rest;
 import com.ua.rd.Hotel.domain.Reservation;
-import com.ua.rd.Hotel.dto.ReservationListDto;
+import com.ua.rd.Hotel.dto.ReservationDto;
 import com.ua.rd.Hotel.service.ReservationService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class ReservationController {
     private final ReservationService reservationService;
 
     @GetMapping("/reservations")
-    public ResponseEntity<List<ReservationListDto>> findAll() {
+    public ResponseEntity<List<ReservationDto>> findAll() {
         return ResponseEntity.ok(reservationService.findAll());
     }
 

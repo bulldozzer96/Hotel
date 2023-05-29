@@ -24,8 +24,8 @@ public class RoomService {
 
 
 
-    public List<RoomDto> findRoomsNotReservationListInRange(LocalDate checkInDate, LocalDate checkOutDate) {
-        List<Room> rooms = roomRepository.findRoomsNotReservationListInRange(checkInDate, checkOutDate);
+    public List<RoomDto> findRoomsNotReservationListInRange(LocalDate checkIn, LocalDate checkOut) {
+        List<Room> rooms = roomRepository.findRoomsNotReservationListInRange(checkIn, checkOut);
 
 
         List<RoomDto> availableRooms = new ArrayList<>();

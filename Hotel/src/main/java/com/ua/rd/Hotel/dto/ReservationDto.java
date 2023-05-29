@@ -5,12 +5,11 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 
 
 @Data
 @Builder
-public class ReservationListDto {
+public class ReservationDto {
     private LocalDate checkIn;
     private Date orderDate;
     private LocalDate checkOut;

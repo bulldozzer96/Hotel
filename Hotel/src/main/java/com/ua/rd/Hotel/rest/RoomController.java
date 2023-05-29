@@ -52,9 +52,9 @@ public class RoomController {
 
     @GetMapping("/rooms/unreserved/all")
     public List<RoomDto> getUnreservedRooms
-            (@RequestParam("checkInDate")
+            (@RequestParam("checkIn")
              LocalDate checkIn,
-             @RequestParam("checkOutDate")
+             @RequestParam("checkOut")
              LocalDate checkOut) {
         return roomService.findRoomsNotReservationListInRange(checkIn, checkOut);
     }

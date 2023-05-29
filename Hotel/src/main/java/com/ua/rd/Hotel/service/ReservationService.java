@@ -1,7 +1,7 @@
 package com.ua.rd.Hotel.service;
 
 import com.ua.rd.Hotel.domain.Reservation;
-import com.ua.rd.Hotel.dto.ReservationListDto;
+import com.ua.rd.Hotel.dto.ReservationDto;
 import com.ua.rd.Hotel.repository.ReservationRepository;
 import com.ua.rd.Hotel.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,15 +23,15 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final RoomRepository roomRepository;
 
-    public List<ReservationListDto> findAll() {
+    public List<ReservationDto> findAll() {
         return reservationRepository.findAll()
                 .stream()
                 .map(ReservationService::buildReservationListDto)
                 .collect(Collectors.toList());
     }
 
-    private static ReservationListDto buildReservationListDto(Reservation reservation) {
-        return ReservationListDto.builder()
+    private static ReservationDto buildReservationListDto(Reservation reservation) {
+        return ReservationDto.builder()
                 .orderDate(reservation.getOrderDate())
                 .checkIn(reservation.getCheckIn())
                 .checkOut(reservation.getCheckOut())
