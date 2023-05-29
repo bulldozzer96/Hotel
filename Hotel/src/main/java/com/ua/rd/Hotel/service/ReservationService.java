@@ -65,7 +65,13 @@ public class ReservationService {
         var reservation = reservationRepository.findById(reservationId).get();
         var room = roomRepository.findById(roomId).get();
         reservation.setRoomId(room);
-        reservationRepository.save(reservation);
+
+        if (isReserveExists(reservation)) {
+            throw new IllegalArgumentException("Reservation already exists");
+
+        } else {
+            reservationRepository.save(reservation);
+        }
     }
 
 

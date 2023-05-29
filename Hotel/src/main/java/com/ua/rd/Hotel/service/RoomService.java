@@ -47,7 +47,7 @@ public class RoomService {
         return roomRepository.findById(id).map(RoomService::buildRoomDto);
     }
 
-    @Transactional
+
     public void save(Room room) {
         try {
             if ((room.getName().startsWith(String.valueOf(room.getFloor())))) {

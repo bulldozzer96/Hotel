@@ -31,7 +31,6 @@ public class ClientsController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-
     @GetMapping("/client/passport/{passport}")
     public ResponseEntity<ClientDto> findByPassport(@PathVariable String passport) {
         try {

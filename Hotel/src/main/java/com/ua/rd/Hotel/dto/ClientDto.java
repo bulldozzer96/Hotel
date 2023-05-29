@@ -3,7 +3,7 @@ package com.ua.rd.Hotel.dto;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDate;
+
 import java.util.List;
 
 
@@ -16,8 +16,5 @@ public class ClientDto {
     private String phone;
     private String sex;
     private List<Long> reservationsId;
-
-
-
 
 }
