@@ -24,20 +24,20 @@ public class ReservationController {
         return ResponseEntity.ok(reservationService.findAll());
     }
 
-    @PostMapping("/reservations")
+    @PostMapping("/reservation")
     public ResponseEntity<Void> save(@RequestBody Reservation reservation) {
         reservationService.save(reservation);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 
-    @PostMapping("/reservations/{reservationId}/room/{roomId}")
+    @PostMapping("/reservation/{reservationId}/room/{roomId}")
     public ResponseEntity<Void> update(@PathVariable Long roomId, @PathVariable Long reservationId) {
         reservationService.changeRoom(roomId, reservationId);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
-    @DeleteMapping("/reservations/{reservationId}")
+    @DeleteMapping("/reservation/{reservationId}")
     public void delete(@PathVariable Long reservationId) {
         reservationService.deleteById(reservationId);
     }
