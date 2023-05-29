@@ -36,7 +36,7 @@ public class RoomController {
         return roomService.findById(id);
     }
 
-    @PostMapping("/rooms")
+    @PostMapping("/room")
     public ResponseEntity<Void> save(@RequestBody Room room) {
         roomService.save(room);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -46,8 +46,6 @@ public class RoomController {
     public void deleteRoom(@PathVariable(value = "id") Long id) {
         roomService.deleteById(id);
     }
-
-
 
 
     @GetMapping("/rooms/unreserved/all")
@@ -69,17 +67,13 @@ public class RoomController {
 
         Room room = optionalRoom.get();
 
-
         room.setName(roomDto.getName());
         room.setCapacity(roomDto.getCapacity());
         room.setFloor(roomDto.getFloor());
         room.setNumberOfBeds(roomDto.getNumberOfBeds());
 
-
         roomService.save(room);
-
         return ResponseEntity.ok().build();
     }
-
 
 }
