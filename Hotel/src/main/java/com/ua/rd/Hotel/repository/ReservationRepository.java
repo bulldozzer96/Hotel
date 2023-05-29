@@ -1,6 +1,7 @@
 package com.ua.rd.Hotel.repository;
 
 import com.ua.rd.Hotel.domain.Reservation;
+import com.ua.rd.Hotel.domain.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,7 +18,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             "AND rl.checkIn = :checkIn " +
             "AND rl.checkOut = :checkOut")
     boolean existsByRoomIdAndCheckInAndCheckOut(
-            @Param("roomId") Long roomId,
+            @Param("roomId") Room roomId,
             @Param("checkIn") LocalDate checkIn,
             @Param("checkOut") LocalDate checkOut);
     

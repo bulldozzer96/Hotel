@@ -43,15 +43,21 @@ public class ReservationService {
     public void save(Reservation reservation) {
 
         reservation.setOrderDate(new Date());
-        reservation.setStatus(1);
-        reservation.setStatusName("Present Reservation");
 
 
-//            if (isReserveExists(reservationList)) {
-//                throw new InvalidDataAccessApiUsageException("Reservation already exists");
-//            }
+            if (isReserveExists(reservation)) {
+                throw new IllegalArgumentException("Reservation already exists");
 
-        reservationRepository.save(reservation);
+            } else {
+                reservationRepository.save(reservation);
+            }
+
+
+    }
+
+    private boolean isReserveExists(Reservation reservation) {
+        return reservationRepository.existsByRoomIdAndCheckInAndCheckOut(
+                reservation.getRoomId(), reservation.getCheckIn(), reservation.getCheckOut());
     }
 
     public void changeRoom(Long roomId, Long reservationId) {
@@ -61,33 +67,6 @@ public class ReservationService {
         reservation.setRoomId(room);
         reservationRepository.save(reservation);
     }
-
-    @Scheduled(fixedRate = 60000)
-    private void updateBookingStatus() {
-        List<Reservation> reservation = reservationRepository.findAll();
-        LocalDate currentDate = LocalDate.now();
-
-        for (Reservation reservations : reservation) {
-            if ( reservations.getStatus() == 1) {
-                if (currentDate.isAfter(reservations.getCheckOut())) {
-                    reservations.setStatus(2);
-                    reservations.setStatusName("Past Reservation");
-                    reservationRepository.save(reservations);
-                }
-            } else if (reservations.getStatus() == 2) {
-                if (currentDate.isBefore(reservations.getCheckOut())) {
-                    reservations.setStatusName("Reserved");
-                    reservations.setStatus(1);
-                    reservationRepository.save(reservations);
-                }
-            }
-        }
-    }
-
-//    private boolean isReserveExists(ReservationList reservationList) {
-//        return reservationListRepository.existsByRoomIdAndCheckInAndCheckOut(
-//                reservationList.getRoomId().getId(), reservationList.getCheckIn(), reservationList.getCheckOut());
-//    }
 
 
     public void deleteById(Long id) {

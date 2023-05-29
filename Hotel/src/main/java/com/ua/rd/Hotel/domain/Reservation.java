@@ -36,11 +36,11 @@ public class Reservation {
     @Temporal(TemporalType.DATE)
     private LocalDate checkOut;
 
-    @Column(name = "status")
-    private Integer status;
-
-    @Column (name = "statusName")
-    private String statusName;
+//    @Column(name = "status")
+//    private Integer status;
+//
+//    @Column (name = "statusName")
+//    private String statusName;
 
     @Column(name = "orderDate")
     @Temporal(TemporalType.TIMESTAMP)

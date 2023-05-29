@@ -31,7 +31,7 @@ public void save(Client client) {
                 .sex(client.getSex())
                 .reservationsId(client.getReservation()
                         .stream()
-                        .map(reservationList -> reservationList.getId())
+                        .map(reservation -> reservation.getId())
                         .collect(Collectors.toList()))
                .build();
     }
