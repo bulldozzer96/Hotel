@@ -21,7 +21,7 @@ import java.util.Optional;
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
 
-    @Query("SELECT r  FROM Room r WHERE r.id NOT IN (SELECT rl.roomId.id FROM ReservationList rl WHERE rl.checkIn <= :checkOut AND rl.checkOut >= :checkIn)")
+    @Query("SELECT r  FROM Room r WHERE r.id NOT IN (SELECT rl.roomId.id FROM Reservation rl WHERE rl.checkIn <= :checkOut AND rl.checkOut >= :checkIn)")
     List<Room> findRoomsNotReservationListInRange(@Param("checkIn") LocalDate checkIn, @Param("checkOut") LocalDate checkOut);
 
 

@@ -36,7 +36,7 @@ public class Room {
 
 
     @OneToMany(mappedBy = "roomId")
-    private List<ReservationList> reservationList;
+    private List<Reservation> reservation;
 
 
 }

@@ -1,20 +1,17 @@
 package com.ua.rd.Hotel.repository;
 
-import com.ua.rd.Hotel.domain.Clients;
+import com.ua.rd.Hotel.domain.Client;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 
 @Repository
-public interface ClientRepository extends JpaRepository<Clients, Long> {
+public interface ClientRepository extends JpaRepository<Client, Long> {
 
 
-    Clients findBySurname(String surname);
-    Clients findByPassport(String passport);
+    Client findBySurname(String surname);
+    Client findByPassport(String passport);
 
-//    Optional<Clients> findById(Long id);
 }

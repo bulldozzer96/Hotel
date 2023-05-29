@@ -1,6 +1,6 @@
 package com.ua.rd.Hotel.rest;
 
-import com.ua.rd.Hotel.domain.Clients;
+import com.ua.rd.Hotel.domain.Client;
 import com.ua.rd.Hotel.dto.ClientDto;
 import com.ua.rd.Hotel.service.ClientService;
 
@@ -26,8 +26,8 @@ public class ClientsController {
     }
 
     @PostMapping("/clients")
-    public ResponseEntity<Void> save(@RequestBody Clients clients) {
-        clientService.save(clients);
+    public ResponseEntity<Void> save(@RequestBody Client client) {
+        clientService.save(client);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -52,7 +52,7 @@ public class ClientsController {
     }
     @PutMapping("/client/{id}")
     public ResponseEntity<Void> updateClient(@PathVariable("id") Long id, @RequestBody ClientDto clientsDto) {
-        Clients client = clientService.findById(id);
+        Client client = clientService.findById(id);
         if (client == null) {
             return ResponseEntity.notFound().build();
         }

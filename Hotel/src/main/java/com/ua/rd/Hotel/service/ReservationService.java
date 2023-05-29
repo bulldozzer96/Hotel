@@ -1,8 +1,8 @@
 package com.ua.rd.Hotel.service;
 
-import com.ua.rd.Hotel.domain.ReservationList;
+import com.ua.rd.Hotel.domain.Reservation;
 import com.ua.rd.Hotel.dto.ReservationListDto;
-import com.ua.rd.Hotel.repository.ReservationListRepository;
+import com.ua.rd.Hotel.repository.ReservationRepository;
 import com.ua.rd.Hotel.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,68 +17,68 @@ import java.util.stream.Collectors;
 @Service
 
 @RequiredArgsConstructor
-public class ReservationListService {
+public class ReservationService {
 
     @Autowired
-    private final ReservationListRepository reservationListRepository;
+    private final ReservationRepository reservationRepository;
     private final RoomRepository roomRepository;
 
     public List<ReservationListDto> findAll() {
-        return reservationListRepository.findAll()
+        return reservationRepository.findAll()
                 .stream()
-                .map(ReservationListService::buildReservationListDto)
+                .map(ReservationService::buildReservationListDto)
                 .collect(Collectors.toList());
     }
 
-    private static ReservationListDto buildReservationListDto(ReservationList reservationList) {
+    private static ReservationListDto buildReservationListDto(Reservation reservation) {
         return ReservationListDto.builder()
-                .orderDate(reservationList.getOrderDate())
-                .checkIn(reservationList.getCheckIn())
-                .checkOut(reservationList.getCheckOut())
-                .roomName(reservationList.getRoomId().getName())
-                .clientName(reservationList.getClientsId().getName())
+                .orderDate(reservation.getOrderDate())
+                .checkIn(reservation.getCheckIn())
+                .checkOut(reservation.getCheckOut())
+                .roomName(reservation.getRoomId().getName())
+                .clientName(reservation.getClientId().getName())
                 .build();
     }
 
-    public void save(ReservationList reservationList) {
+    public void save(Reservation reservation) {
 
-        reservationList.setOrderDate(new Date());
-        reservationList.setStatus(1);
-        reservationList.setStatusName("Reserved");
+        reservation.setOrderDate(new Date());
+        reservation.setStatus(1);
+        reservation.setStatusName("Present Reservation");
 
 
 //            if (isReserveExists(reservationList)) {
 //                throw new InvalidDataAccessApiUsageException("Reservation already exists");
 //            }
 
-        reservationListRepository.save(reservationList);
+        reservationRepository.save(reservation);
     }
 
     public void changeRoom(Long roomId, Long reservationId) {
 
-        var reservation = reservationListRepository.findById(reservationId).get();
+        var reservation = reservationRepository.findById(reservationId).get();
         var room = roomRepository.findById(roomId).get();
         reservation.setRoomId(room);
-        reservationListRepository.save(reservation);
+        reservationRepository.save(reservation);
     }
 
     @Scheduled(fixedRate = 60000)
     private void updateBookingStatus() {
-        List<ReservationList> reservationList = reservationListRepository.findAll();
+        List<Reservation> reservation = reservationRepository.findAll();
         LocalDate currentDate = LocalDate.now();
 
-        for (ReservationList reservations : reservationList) {
+        for (Reservation reservations : reservation) {
             if ( reservations.getStatus() == 1) {
                 if (currentDate.isAfter(reservations.getCheckOut())) {
                     reservations.setStatus(2);
                     reservations.setStatusName("Past Reservation");
-                    reservationListRepository.save(reservations);
+                    reservationRepository.save(reservations);
                 }
             } else if (reservations.getStatus() == 2) {
                 if (currentDate.isBefore(reservations.getCheckOut())) {
                     reservations.setStatusName("Reserved");
                     reservations.setStatus(1);
-                    reservationListRepository.save(reservations);
+                    reservationRepository.save(reservations);
                 }
             }
         }
@@ -91,7 +91,7 @@ public class ReservationListService {
 
 
     public void deleteById(Long id) {
-        reservationListRepository.deleteById(id);
+        reservationRepository.deleteById(id);
     }
 }
 

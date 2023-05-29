@@ -15,7 +15,7 @@ import java.util.Date;
 
 
 @Data
-@Table(name = "reservationList")
+@Table(name = "reservation")
 @Entity
 @Builder
 @NoArgsConstructor
@@ -23,7 +23,7 @@ import java.util.Date;
 @EnableScheduling
 @EnableTransactionManagement
 
-public class ReservationList {
+public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -47,8 +47,8 @@ public class ReservationList {
     private Date orderDate;
 
     @ManyToOne
-    @JoinColumn(name = "clients_Id")
-    private Clients clientsId;
+    @JoinColumn(name = "client_Id")
+    private Client clientId;
 
     @ManyToOne
     @JoinColumn(name = "room_id")

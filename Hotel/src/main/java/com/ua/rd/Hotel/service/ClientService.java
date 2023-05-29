@@ -1,5 +1,5 @@
 package com.ua.rd.Hotel.service;
-import com.ua.rd.Hotel.domain.Clients;
+import com.ua.rd.Hotel.domain.Client;
 import com.ua.rd.Hotel.dto.ClientDto;
 import com.ua.rd.Hotel.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,22 +14,22 @@ public class ClientService {
 
     public List<ClientDto> findAll() {
         return clientRepository.findAll().stream()
-                .map((Clients clients) -> buildClientDto(clients))
+                .map((Client client) -> buildClientDto(client))
                 .collect(Collectors.toList());
     }
 
-public void save(Clients clients) {
-    clientRepository.save(clients);
+public void save(Client client) {
+    clientRepository.save(client);
 }
-    private static ClientDto buildClientDto(Clients clients) {
+    private static ClientDto buildClientDto(Client client) {
 
         return ClientDto.builder()
-                .name(clients.getName())
-                .surname(clients.getSurname())
-                .passport(clients.getPassport())
-                .phone(clients.getPhone())
-                .sex(clients.getSex())
-                .reservationsId(clients.getReservationList()
+                .name(client.getName())
+                .surname(client.getSurname())
+                .passport(client.getPassport())
+                .phone(client.getPhone())
+                .sex(client.getSex())
+                .reservationsId(client.getReservation()
                         .stream()
                         .map(reservationList -> reservationList.getId())
                         .collect(Collectors.toList()))
@@ -43,7 +43,7 @@ public void save(Clients clients) {
         return buildClientDto(clientRepository.findByPassport(passport));
     }
 
-    public Clients findById(Long id) {
+    public Client findById(Long id) {
         return clientRepository.findById(id).get();
     }
 }

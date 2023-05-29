@@ -28,7 +28,7 @@ public class RoomService {
         List<Room> rooms = roomRepository.findRoomsNotReservationListInRange(checkInDate, checkOutDate);
 
 
-        List<RoomDto> roomDtos = new ArrayList<>();
+        List<RoomDto> availableRooms = new ArrayList<>();
         for (Room room : rooms) {
             RoomDto roomDto = RoomDto.builder()
                     .name(room.getName())
@@ -36,10 +36,10 @@ public class RoomService {
                     .numberOfBeds(room.getNumberOfBeds())
                     .floor(room.getFloor())
                     .build();
-            roomDtos.add(roomDto);
+            availableRooms.add(roomDto);
         }
 
-        return roomDtos;
+        return availableRooms;
     }
 
 

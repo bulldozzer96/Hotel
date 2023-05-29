@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Clients {
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,8 +29,8 @@ public class Clients {
     private String sex;
 
 
-    @OneToMany(mappedBy = "clientsId")
-    private List<ReservationList> reservationList;
+    @OneToMany(mappedBy = "clientId")
+    private List<Reservation> reservation;
 
 
 
