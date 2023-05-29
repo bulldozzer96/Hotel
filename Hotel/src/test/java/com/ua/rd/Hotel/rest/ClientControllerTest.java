@@ -70,7 +70,13 @@ public class ClientControllerTest {
 
     @Test
     public void save() throws Exception {
-        ClientDto clientDto = ClientDto.builder().name("John").surname("Doe").passport("ABC123").phone("1234567890").sex("Male").build();
+        ClientDto clientDto = ClientDto.builder()
+            .name("John")
+            .surname("Doe")
+            .passport("ABC123")
+            .phone("1234567890")
+            .sex("Male")
+            .build();
         String requestBody = new ObjectMapper().writeValueAsString(clientDto);
 
         mockMvc.perform(post("/clients")
