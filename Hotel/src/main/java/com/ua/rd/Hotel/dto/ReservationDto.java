@@ -11,12 +11,13 @@ import java.util.Date;
 @Builder
 public class ReservationDto {
 
-    private Long roomId;
-    private LocalDate checkIn;
+
+
     private Date orderDate;
+    private LocalDate checkIn;
     private LocalDate checkOut;
     private String roomName;
-    private Long clientId;
+
     private String clientName;
 
 
