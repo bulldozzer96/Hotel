@@ -11,8 +11,6 @@ import java.util.Date;
 @Builder
 public class ReservationDto {
 
-
-
     private Date orderDate;
     private LocalDate checkIn;
     private LocalDate checkOut;
